@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateTripActivity">
+    
+    <TextView
+        android:id="@+id/tripTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="Title"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/createTripBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pickDate"
+        android:layout_marginTop="46dp"
+        android:layout_marginBottom="10dp"
+        android:text="Create Trip" />
+
+    <EditText
+        android:id="@+id/pickDate"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_below="@id/tripTitle"
+        android:gravity="center"
+        android:layout_marginTop="54dp"
+        android:hint="Pick A Date"/>
+
+</RelativeLayout>

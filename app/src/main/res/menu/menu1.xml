@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/home"
+        android:title="Home"
+        app:showAsAction="never"
+        />
+    <item android:id="@+id/Filter"
+        android:title="Pick County"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/View"
+        android:title="View Profile"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/Trips"
+        android:title="Show Trips"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/Connections"
+        android:title="Show Groups"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/logout"
+        android:title="Logout"
+        app:showAsAction="never"/>
+
+</menu>

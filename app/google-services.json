@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "181442149263",
+    "firebase_url": "https://fyp-staycation.firebaseio.com",
+    "project_id": "fyp-staycation",
+    "storage_bucket": "fyp-staycation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181442149263:android:8c640973ee9b507997a9fa",
+        "android_client_info": {
+          "package_name": "com.example.fyp_staycation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "181442149263-bfb5mft7nhcfl2dcc10hr2nj5i4cq6h4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA90Zy-HrMnl6rLFP3ZT4rULsGQqgHfXgo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "181442149263-bfb5mft7nhcfl2dcc10hr2nj5i4cq6h4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

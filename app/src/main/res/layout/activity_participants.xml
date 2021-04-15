@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ParticipantsActivity">
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        ></TextView>
+
+    <Button
+        android:id="@+id/joinButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="33dp"
+        android:text="Join Trip" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userRv"
+        android:layout_width="match_parent"
+        android:layout_height="615dp"
+        android:layout_below="@id/joinButton"
+        android:layout_marginTop="22dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>
