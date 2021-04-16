@@ -2,9 +2,13 @@ package com.example.fyp_staycation;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -19,9 +23,18 @@ import com.example.fyp_staycation.classes.Connections;
 import com.example.fyp_staycation.classes.Locations;
 import com.example.fyp_staycation.classes.Trip;
 import com.example.fyp_staycation.classes.User;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,11 +52,15 @@ public class CreateTripActivity extends AppCompatActivity {
     private TextView title;
     private EditText date;
     private DatePickerDialog picker;
-    private String location ="";
+    private String location = "";
     private FirebaseUser user;
     private Button createTrip;
+    private FloatingActionButton createTrip2;
     private DatabaseReference tripDB, userDB;
     String user1, newUsername;
+    private SupportMapFragment supportMapFragment;
+    private FusedLocationProviderClient client;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +68,8 @@ public class CreateTripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_trip);
 
         Bundle extras = getIntent().getExtras();
-        if(extras == null) {
-            Log.e("location is null","");
+        if (extras == null) {
+            Log.e("location is null", "");
         } else {
             location = extras.getString("groupId");
         }
@@ -81,19 +98,74 @@ public class CreateTripActivity extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                             }
-                            }, year, month, day);
+                        }, year, month, day);
                 picker.show();
             }
         });
 
-        createTrip = (Button) findViewById(R.id.createTripBtn);
-        createTrip.setOnClickListener(new View.OnClickListener() {
+
+        createTrip2 = (FloatingActionButton) findViewById(R.id.createTripBtn2);
+        createTrip2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createTrip();
             }
         });
 
+
+        supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.tripMap);
+        client = LocationServices.getFusedLocationProviderClient(this);
+
+        if (ActivityCompat.checkSelfPermission(CreateTripActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            getCurrentLocation();
+        }
+        else{
+            ActivityCompat.requestPermissions(CreateTripActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44 );
+        }
+    }
+
+    private void getCurrentLocation() {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission
+                (this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Task<Location> task = client.getLastLocation();
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if(location != null){
+                    supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+                        @Override
+                        public void onMapReady(GoogleMap googleMap) {
+                            LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                            MarkerOptions options = new MarkerOptions().position(latLng).title("Current Location");
+
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                            googleMap.addMarker(options);
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == 44){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                getCurrentLocation();
+            }
+        }
     }
 
     private void createTrip() {

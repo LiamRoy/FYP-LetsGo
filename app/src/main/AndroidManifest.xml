@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.fyp_staycation" >
+    package="com.example.fyp_staycation">
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the "MyLocation" functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -8,7 +17,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FYPStayCation" >
+        android:theme="@style/Theme.FYPStayCation">
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity android:name=".FilterActivity" />
         <activity android:name=".ParticipantsActivity" />
         <activity android:name=".TripsActivity" />
@@ -18,10 +40,12 @@
         <activity android:name=".LocationDetailsActivity" />
         <activity android:name=".AdminPickActivity" />
         <activity android:name=".AdminActivity" />
-        <activity android:name=".AdminLogin"
-            android:theme="@style/Theme.FYPStayCation.NoActionBar"/>
+        <activity
+            android:name=".AdminLogin"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/Theme.FYPStayCation.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,9 +53,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterUser"
-            android:theme="@style/Theme.FYPStayCation.NoActionBar"/>
+        <activity
+            android:name=".RegisterUser"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
         <activity android:name=".ProfileActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_key"
+            android:value="AIzaSyAqi567Bzv4jmcMFo2q_Y3Wl_W_UkNxXRE" />
     </application>
 
 </manifest>

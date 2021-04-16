@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
-
         android:textColor="@color/design_default_color_primary"
         android:text="You"/>
 

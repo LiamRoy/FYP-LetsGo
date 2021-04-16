@@ -6,7 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateTripActivity">
-    
+
+    <fragment
+        android:id="@+id/tripMap"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+        android:layout_below="@id/pickDate" />
+
     <TextView
         android:id="@+id/tripTitle"
         android:layout_width="match_parent"
@@ -18,15 +25,6 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/createTripBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/pickDate"
-        android:layout_marginTop="46dp"
-        android:layout_marginBottom="10dp"
-        android:text="Create Trip" />
-
     <EditText
         android:id="@+id/pickDate"
         android:layout_width="match_parent"
@@ -35,5 +33,23 @@
         android:gravity="center"
         android:layout_marginTop="54dp"
         android:hint="Pick A Date"/>
+
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/createTripBtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pickDate"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginTop="425dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp"
+        android:foregroundGravity="bottom"
+        android:padding="10dp"
+        android:src="@drawable/ic_add_trip_24" />
 
 </RelativeLayout>
