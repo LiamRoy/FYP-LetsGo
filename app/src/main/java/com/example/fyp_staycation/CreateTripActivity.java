@@ -8,6 +8,8 @@ import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.InputType;
@@ -22,7 +24,6 @@ import android.widget.Toast;
 import com.example.fyp_staycation.classes.Connections;
 import com.example.fyp_staycation.classes.Locations;
 import com.example.fyp_staycation.classes.Trip;
-import com.example.fyp_staycation.classes.User;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -42,14 +43,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 public class CreateTripActivity extends AppCompatActivity {
 
-    private TextView title;
+    private TextView title, county;
     private EditText date;
     private DatePickerDialog picker;
     private String location = "";
@@ -60,7 +62,21 @@ public class CreateTripActivity extends AppCompatActivity {
     String user1, newUsername;
     private SupportMapFragment supportMapFragment;
     private FusedLocationProviderClient client;
+    private Button btnPicker;
+    private TextView latLng;
+    private int PLACE_PICKER_REQUEST = 1;
+    private Geocoder geocoder;
+    private String name,countyName;
+    private GoogleMap map;
+    private OnMapReadyCallback onMapReadyCallback;
 
+    private GoogleMap.OnMapClickListener mapClickListener;
+    public CreateTripActivity(){
+
+    }
+    public CreateTripActivity(String name, String countyName) {
+        this.countyName = countyName;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +90,33 @@ public class CreateTripActivity extends AppCompatActivity {
             location = extras.getString("groupId");
         }
 
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Locations");
+        databaseReference.child(location).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Locations locations = snapshot.getValue(Locations.class);
+                if(locations!=null){
+                    name = locations.getCity();
+                    countyName = locations.getCounty();
+                    Log.e("test", countyName);
+                }
+                Log.e("test", "test");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        geocoder = new Geocoder(this);
         newUsername = "";
         user = FirebaseAuth.getInstance().getCurrentUser();
         tripDB = FirebaseDatabase.getInstance().getReference().child("Trips");
         userDB = FirebaseDatabase.getInstance().getReference().child("Users");
         user1 = user.getUid();
         title = (TextView) findViewById(R.id.tripTitle);
+        county = (TextView) findViewById(R.id.tripCounty);
         getLocationDetails(location);
 
         date = (EditText) findViewById(R.id.pickDate);
@@ -103,7 +140,6 @@ public class CreateTripActivity extends AppCompatActivity {
             }
         });
 
-
         createTrip2 = (FloatingActionButton) findViewById(R.id.createTripBtn2);
         createTrip2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +158,17 @@ public class CreateTripActivity extends AppCompatActivity {
         else{
             ActivityCompat.requestPermissions(CreateTripActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44 );
         }
+
+//        btnPicker = (Button) findViewById(R.id.mapBtn);
+//        latLng = (TextView) findViewById(R.id.LatLng);
+
+//        btnPicker.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //PlacePicker.
+//            }
+//        });
+
     }
 
     private void getCurrentLocation() {
@@ -141,22 +188,57 @@ public class CreateTripActivity extends AppCompatActivity {
         Task<Location> task = client.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
-            public void onSuccess(Location location) {
-                if(location != null){
+            public void onSuccess(Location location1) {
+                if(location1 != null){
                     supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                         @Override
                         public void onMapReady(GoogleMap googleMap) {
-                            LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-                            MarkerOptions options = new MarkerOptions().position(latLng).title("Current Location");
-
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
-                            googleMap.addMarker(options);
+                            map = googleMap;
+                            Log.e("test", String.valueOf(county));
+//                            LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+//                            MarkerOptions options = new MarkerOptions().position(latLng).title("Current Location");
+                            //DONT FORGET TO FIX THIS!!!
+//                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+//                            googleMap.addMarker(options);
+                            try {
+                                List<Address> addressList = geocoder.getFromLocationName(countyName, 1);
+                                if(addressList.size()>0) {
+                                    Address address = addressList.get(0);
+                                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                                    MarkerOptions options = new MarkerOptions().position(new LatLng(address.getLatitude(), address.getLongitude()))
+                                            .title(address.getLocality());
+                                    map.addMarker(options);
+                                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
                 }
             }
         });
 
+        mapClickListener = new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                Log.d("test", "onMapLongClick: " + latLng.toString());
+                try {
+                    List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                    if (addresses.size() > 0) {
+                        Address address = addresses.get(0);
+                        String streetAddress = address.getAddressLine(0);
+                        map.addMarker(new MarkerOptions()
+                                .position(latLng)
+                                .title(streetAddress)
+                                .draggable(true)
+                        );
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
     }
 
     @Override
@@ -263,5 +345,11 @@ public class CreateTripActivity extends AppCompatActivity {
 
             }
         });
+
     }
+
+    public void setCountyName(String countyName) {
+        this.countyName = countyName;
+    }
+
 }

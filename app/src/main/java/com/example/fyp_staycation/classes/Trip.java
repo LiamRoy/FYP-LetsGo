@@ -1,5 +1,7 @@
 package com.example.fyp_staycation.classes;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class Trip {
 
     private String tripTitle;
@@ -7,16 +9,18 @@ public class Trip {
     private String tid;
     private String createdBy;
     private String participants;
+    private LatLng latlng;
 
     public Trip() {
     }
 
-    public Trip(String tripTitle, String date, String tid, String createdBy, String participants) {
+    public Trip(String tripTitle, String date, String tid, String createdBy, String participants, LatLng latLng) {
         this.tripTitle = tripTitle;
         this.date = date;
         this.tid = tid;
         this.createdBy = createdBy;
         this.participants = participants;
+        this.latlng = latLng;
     }
 
     public String getTripTitle() {
@@ -57,5 +61,13 @@ public class Trip {
 
     public void setParticipants(String participants) {
         this.participants = participants;
+    }
+
+    public LatLng getLatlng() {
+        return latlng;
+    }
+
+    public void setLatlng(LatLng latlng) {
+        this.latlng = latlng;
     }
 }
