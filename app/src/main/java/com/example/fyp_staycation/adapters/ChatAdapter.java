@@ -101,8 +101,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.HolderChat> {
 
         holder.messageTv.setText(message);
         holder.timeTv.setText(dateTime);
-        //holder.nameTv.setText(senderId);
-        setUserName(messages, holder);
+        holder.nameTv.setText(senderId);
+        //setUserName(messages, holder);
     }
 
     private void setUserName(Messages messages, HolderChat holder) {
@@ -136,7 +136,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.HolderChat> {
     @Override
     public int getItemViewType(int position) {
         Messages messages = messagesList.get(position);
-
 
         if(messagesList.get(position).getSender().equals(firebaseAuth.getCurrentUser().getEmail())){
             return MSG_TYPE_RIGHT;

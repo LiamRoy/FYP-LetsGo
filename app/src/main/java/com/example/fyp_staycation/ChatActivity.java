@@ -163,11 +163,10 @@ public class ChatActivity extends AppCompatActivity {
     private void sendMessage(String message) {
 
         String timestamp = ""+System.currentTimeMillis();
-
-
         User user = new User();
 
         HashMap<String, Object> hashMap = new HashMap<>();
+
         hashMap.put("sender", firebaseAuth.getCurrentUser().getEmail());
         hashMap.put("message", message);
         hashMap.put("timestamp", timestamp);

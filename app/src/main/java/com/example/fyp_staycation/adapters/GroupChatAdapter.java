@@ -98,8 +98,25 @@ public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.View
                             String dateTime =  DateFormat.format("dd/mm/yyyy hh:mm:ss", calendar).toString();
 
                             holder.message.setText(message);
-                            holder.name.setText(sender);
+                            //holder.name.setText(sender);
                             holder.time.setText(dateTime);
+
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users");
+                            reference.orderByChild("uid").equalTo(sender)
+                                    .addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for(DataSnapshot ds: snapshot.getChildren()){
+                                                String name1 = ""+ds.child("email").getValue();
+                                                holder.name.setText(name1);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
 
 
                         }

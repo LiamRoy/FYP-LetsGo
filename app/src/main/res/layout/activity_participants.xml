@@ -14,7 +14,25 @@
         android:text="test"
         android:textAlignment="center"
         android:gravity="center_horizontal"
-        ></TextView>
+        />
+    <TextView
+    android:id="@+id/lat"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="test"
+    android:textAlignment="center"
+        android:layout_below="@id/title"
+    android:gravity="center_horizontal"
+    />
+    <TextView
+        android:id="@+id/lng"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test"
+        android:textAlignment="center"
+        android:layout_below="@id/lat"
+        android:gravity="center_horizontal"
+        />
 
     <Button
         android:id="@+id/joinButton"
@@ -24,12 +42,19 @@
         android:layout_marginTop="33dp"
         android:text="Join Trip" />
 
+    <fragment
+        android:id="@+id/tripMap"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="211dp"
+        android:layout_below="@id/joinButton" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userRv"
         android:layout_width="match_parent"
-        android:layout_height="615dp"
-        android:layout_below="@id/joinButton"
-        android:layout_marginTop="22dp">
+        android:layout_height="400dp"
+        android:layout_below="@id/tripMap"
+        android:layout_marginTop="-2dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 

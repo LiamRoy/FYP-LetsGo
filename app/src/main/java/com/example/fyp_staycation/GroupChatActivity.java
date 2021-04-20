@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,17 +54,16 @@ public class GroupChatActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Connections");
         groupTitle = findViewById(R.id.groupTitle);
         groupsRv = findViewById(R.id.rvGroup);
-
         firebaseAuth = FirebaseAuth.getInstance();
+
+        connections = new Connections();
 
         //addList();
         //loadGroupChatList();
 
 
-
         //groupsRv.setLayoutManager(new LinearLayoutManager(this));
     }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -79,9 +79,9 @@ public class GroupChatActivity extends AppCompatActivity {
 
                        //Toast.makeText(GroupChatActivity.this, model.getGroupId().toString(),Toast.LENGTH_SHORT).show();
                         holder.groupTitle.setText(model.getGroupId());
-                        /*holder.name.setText(model.getFirebaseUser().getUid());
+                        holder.name.setText(model.getProfileName());
                         holder.time.setText(model.getTime());
-                        holder.message.setText(model.getMessage());*/
+                        holder.message.setText(model.getMessage());
 
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -103,6 +103,7 @@ public class GroupChatActivity extends AppCompatActivity {
 
                 };
         groupChatAdapter = new GroupChatAdapter(addList());
+        groupChatAdapter.notifyDataSetChanged();
         groupsRv.setAdapter(adapter);
         adapter.startListening();
 
@@ -119,6 +120,7 @@ public class GroupChatActivity extends AppCompatActivity {
     }
    private void loadGroupChatList() {
 
+       items=new ArrayList<>();
        databaseReference.addValueEventListener(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -126,6 +128,8 @@ public class GroupChatActivity extends AppCompatActivity {
                    items.clear();
                    if(!ds.child("Members").child(firebaseAuth.getUid()).exists()){
                        Connections connections = ds.getValue(Connections.class);
+                       String Title = "" + ds.child("groupId").getValue();
+                       //groupTitle.setText(Title);
                        items.add(connections);
                    }
                }

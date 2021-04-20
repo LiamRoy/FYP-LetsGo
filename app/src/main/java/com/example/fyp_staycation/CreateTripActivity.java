@@ -45,7 +45,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -63,12 +65,14 @@ public class CreateTripActivity extends AppCompatActivity {
     private SupportMapFragment supportMapFragment;
     private FusedLocationProviderClient client;
     private Button btnPicker;
-    private TextView latLng;
+    //private TextView latLng;
     private int PLACE_PICKER_REQUEST = 1;
     private Geocoder geocoder;
     private String name,countyName;
     private GoogleMap map;
     private OnMapReadyCallback onMapReadyCallback;
+    private LatLng latLng;
+    private String cords;
 
     private GoogleMap.OnMapClickListener mapClickListener;
     public CreateTripActivity(){
@@ -119,6 +123,16 @@ public class CreateTripActivity extends AppCompatActivity {
         county = (TextView) findViewById(R.id.tripCounty);
         getLocationDetails(location);
 
+        supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.tripMap);
+        client = LocationServices.getFusedLocationProviderClient(this);
+
+        if (ActivityCompat.checkSelfPermission(CreateTripActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            getCurrentLocation();
+        }
+        else{
+            ActivityCompat.requestPermissions(CreateTripActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44 );
+        }
+
         date = (EditText) findViewById(R.id.pickDate);
         date.setInputType(InputType.TYPE_NULL);
         date.setOnClickListener(new View.OnClickListener() {
@@ -147,17 +161,6 @@ public class CreateTripActivity extends AppCompatActivity {
                 createTrip();
             }
         });
-
-
-        supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.tripMap);
-        client = LocationServices.getFusedLocationProviderClient(this);
-
-        if (ActivityCompat.checkSelfPermission(CreateTripActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            getCurrentLocation();
-        }
-        else{
-            ActivityCompat.requestPermissions(CreateTripActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44 );
-        }
 
 //        btnPicker = (Button) findViewById(R.id.mapBtn);
 //        latLng = (TextView) findViewById(R.id.LatLng);
@@ -201,14 +204,15 @@ public class CreateTripActivity extends AppCompatActivity {
 //                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
 //                            googleMap.addMarker(options);
                             try {
-                                List<Address> addressList = geocoder.getFromLocationName(countyName, 1);
+                                List<Address> addressList = geocoder.getFromLocationName(name, 1);
                                 if(addressList.size()>0) {
                                     Address address = addressList.get(0);
-                                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                                    latLng = new LatLng(address.getLatitude(), address.getLongitude());
                                     MarkerOptions options = new MarkerOptions().position(new LatLng(address.getLatitude(), address.getLongitude()))
                                             .title(address.getLocality());
                                     map.addMarker(options);
                                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+
                                 }
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -224,7 +228,7 @@ public class CreateTripActivity extends AppCompatActivity {
             public void onMapClick(LatLng latLng) {
                 Log.d("test", "onMapLongClick: " + latLng.toString());
                 try {
-                    List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                    List<Address> addresses = geocoder.getFromLocation(Double.parseDouble(countyName), latLng.longitude, 1);
                     if (addresses.size() > 0) {
                         Address address = addresses.get(0);
                         String streetAddress = address.getAddressLine(0);
@@ -278,10 +282,15 @@ public class CreateTripActivity extends AppCompatActivity {
 
         final HashMap<String, Object> trip = new HashMap<>();
 
+        double latId= latLng.latitude;
+        double lngId= latLng.longitude;
         trip.put("createdBy", user.getEmail());
         trip.put("tid", timestamp);
         trip.put("tripTitle", location);
         trip.put("date", date.getText().toString());
+        trip.put("lat", latId);
+        trip.put("lng", lngId);
+        trip.put("address", name);
 
         tripDB.child(timestamp).updateChildren(trip)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -289,7 +298,6 @@ public class CreateTripActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
 
                         HashMap<String, Object> members = new HashMap<>();
-
 
                         Toast.makeText(CreateTripActivity.this, "test " + newUsername, Toast.LENGTH_SHORT).show();
                         //members.put("Username", newUsername);
@@ -300,10 +308,10 @@ public class CreateTripActivity extends AppCompatActivity {
                         trip1.setDate(date.getText().toString());
                         trip1.setCreatedBy(user.getEmail());
                         trip1.setTripTitle(location);
+                        trip1.setLat(latId);
+                        trip1.setLng(lngId);
+                        trip1.setAddress(name);
                         trip1.setParticipants(String.valueOf(user));
-
-
-
 
                         DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Trips").child(timestamp);
                         db.child("Participants").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(members)

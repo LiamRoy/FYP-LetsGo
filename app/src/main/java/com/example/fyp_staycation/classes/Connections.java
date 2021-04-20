@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class Connections {
 
     String groupId;
+    Messages messages;
     String time;
     String message;
     String username;
@@ -13,8 +14,9 @@ public class Connections {
     public Connections() {
     }
 
-    public Connections(String groupId, String time,String message, String username,String profileName) {
+    public Connections(String groupId,Messages messages, String time,String message, String username,String profileName) {
         this.groupId = groupId;
+        this.messages=messages;
         this.message=message;
         this.time=time;
         this.username = username;
@@ -27,6 +29,14 @@ public class Connections {
 
     public void setGroupId(String groupId) {
         this.groupId = groupId;
+    }
+
+    public Messages getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Messages messages) {
+        this.messages = messages;
     }
 
     public String getTime() {

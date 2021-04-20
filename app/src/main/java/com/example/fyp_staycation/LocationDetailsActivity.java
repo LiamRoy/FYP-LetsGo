@@ -107,15 +107,17 @@ public class LocationDetailsActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
 
                         HashMap<String, Object> members = new HashMap<>();
-                        members.put("User", user.getUid());
+                        members.put("User", user.getEmail());
+                        members.put("groupId",location);
                         //members.put("Username", profile);
                         Connections connections = new Connections();
                         connections.setGroupId(location);
+                        connections.setProfileName(user.getEmail());
                         //connections.setProfileName(profile);
                         //Toast.makeText(LocationDetailsActivity.this, "test " + profile.toString(), Toast.LENGTH_SHORT).show();
 
                         DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Connections").child(location);
-                        db.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(members)
+                        db.child("Members").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(members)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
