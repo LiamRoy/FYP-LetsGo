@@ -4,14 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/backround_gradient"
     android:layout_height="match_parent"
     tools:context=".CreateTripActivity">
+    <include layout="@layout/toolbar"/>
 
     <fragment
         android:id="@+id/tripMap"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="420dp"
+        android:layout_height="562dp"
         android:layout_below="@id/pickDate" />
 
     <TextView
@@ -20,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="Title"
-        android:textColor="@color/black"
+        android:text="Location"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -31,22 +33,32 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_below="@id/tripTitle"
-        android:text="Title"
-        android:textColor="@color/black"
+        android:text="County"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/pickDate"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_width="206dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tripTitle"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="45dp"
+        android:layout_toRightOf="@id/pickTime"
         android:gravity="center"
-        android:layout_marginTop="54dp"
-        android:hint="Pick A Date"/>
+        android:hint="Pick A Date"
+        android:textColor="@color/white" />
 
-
-
+    <EditText
+        android:id="@+id/pickTime"
+        android:layout_width="206dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tripTitle"
+        android:hint="Pick Meeting Time"
+        android:textColor="@color/white"
+        android:layout_marginTop="45dp"
+        android:inputType="time" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/createTripBtn2"
@@ -62,5 +74,7 @@
         android:foregroundGravity="bottom"
         android:padding="10dp"
         android:src="@drawable/ic_add_trip_24" />
+
+
 
 </RelativeLayout>

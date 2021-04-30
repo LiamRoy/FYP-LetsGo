@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -39,6 +41,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private EditText description;
     private Button registerUser;
     private ProgressBar progressBar;
+    private StorageReference profileImagesRef;
 
     User user;
 
@@ -60,8 +63,6 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         password = (EditText) findViewById(R.id.etPassword);
         description = (EditText) findViewById(R.id.etDescription);
         phoneNum = (EditText) findViewById(R.id.etPhNum);
-
-
 
     }
 
@@ -86,7 +87,6 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         String description1 = description.getText().toString().trim();
         String phoneNum1 = phoneNum.getText().toString().trim();
         String uid1 = mAuth.getUid();
-        String image1 = "";
 
         if(username1.isEmpty()){
             username.setError("Username is Required");
@@ -128,7 +128,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            User user = new User(username1, email1, password1, description1, phoneNum1, uid1, image1);
+                            User user = new User(username1, email1, password1, description1, phoneNum1, uid1);
 
                             FirebaseDatabase.getInstance().getReference("User")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

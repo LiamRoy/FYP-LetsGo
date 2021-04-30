@@ -3,12 +3,19 @@ package com.example.fyp_staycation;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,6 +25,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,17 +46,19 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
-public class AdminPickActivity extends AppCompatActivity {
+public class AdminPickActivity extends AppCompatActivity implements GoogleMap.OnMapLongClickListener {
 
-    private String category, Title, City, County, Lname, saveCurrentDate, saveCurrentTime, description;
+    private String category, Title, City, County, Lname, saveCurrentDate, saveCurrentTime, description,link;
     private Button AddNewLocationButton;
     private ImageView InputProductImage;
-    private EditText InputTitleName, InputCity, InputCounty, InputCategory, InputDescription;
+    private EditText InputTitleName, InputCity, InputCounty, InputCategory, InputDescription,InputLink;
     private static final int GalleryPick = 1;
     private Uri ImageUri;
     private String locationRandomKey, downloadImageUrl;
@@ -48,18 +66,27 @@ public class AdminPickActivity extends AppCompatActivity {
     private DatabaseReference LocationRef, CountyRef;
     private ProgressDialog loadingBar;
 
+    private SupportMapFragment supportMapFragment;
+    private FusedLocationProviderClient client;
+    private int PLACE_PICKER_REQUEST = 1;
+    private Geocoder geocoder;
+    private String name,countyName,username;
+    private GoogleMap map;
+    private OnMapReadyCallback onMapReadyCallback;
+    private String cords;
+    private LatLng latLng1;
+    private double latId,lngId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_pick);
-
-
-
         LocationImagesRef = FirebaseStorage.getInstance().getReference().child("Location Images");
         LocationRef = FirebaseDatabase.getInstance().getReference().child("Locations");
         CountyRef = FirebaseDatabase.getInstance().getReference().child("County");
+
 
 
         AddNewLocationButton = (Button) findViewById(R.id.btnadd);
@@ -70,8 +97,20 @@ public class AdminPickActivity extends AppCompatActivity {
         InputCity = (EditText) findViewById(R.id.city);
         InputCounty = (EditText) findViewById(R.id.county);
         InputDescription = (EditText) findViewById(R.id.description);
+        InputLink=(EditText)findViewById(R.id.link);
         loadingBar = new ProgressDialog(this);
 
+
+        geocoder = new Geocoder(this);
+        supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.tripMap);
+        client = LocationServices.getFusedLocationProviderClient(this);
+
+        if (ActivityCompat.checkSelfPermission(AdminPickActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            getCurrentLocation();
+        }
+        else{
+            ActivityCompat.requestPermissions(AdminPickActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44 );
+        }
 
         InputProductImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +119,6 @@ public class AdminPickActivity extends AppCompatActivity {
                 OpenGallery();
             }
         });
-
 
         AddNewLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +129,75 @@ public class AdminPickActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == 44){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                getCurrentLocation();
+            }
+        }
+    }
 
+
+
+    private void getCurrentLocation() {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission
+                (this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Task<Location> task = client.getLastLocation();
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location1) {
+                if (location1 != null) {
+                    supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+                        @Override
+                        public void onMapReady(GoogleMap googleMap) {
+                            map = googleMap;
+                            //Log.e("test", String.valueOf(county));
+                             LatLng latLng = new LatLng(location1.getLatitude(), location1.getLongitude());
+                            MarkerOptions options = new MarkerOptions().position(latLng).title("Current Location");
+                            //DON'T FORGET TO FIX THIS!!!
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                            googleMap.addMarker(options);
+
+                            map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+                                @Override
+                                public void onMapLongClick(LatLng latLng1) {
+                                    Log.d("test", "onMapLongClick: " + latLng1.toString());
+                                    latLng1 = new LatLng(latLng1.latitude, latLng1.longitude);
+                                    try {
+                                        List<Address> addresses = geocoder.getFromLocation(latLng1.latitude, latLng1.longitude, 1);
+                                        if (addresses.size() > 0) {
+                                            Address address = addresses.get(0);
+                                            latLng1 = new LatLng(address.getLatitude(), address.getLongitude());
+                                            MarkerOptions options = new MarkerOptions().position(new LatLng(address.getLatitude(), address.getLongitude()))
+                                                    .title(address.getLocality());
+                                            map.addMarker(options);
+                                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng1, 15));
+                                            latId = latLng1.latitude;
+                                            lngId = latLng1.longitude;
+                                        }
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        });
+    }
 
     private void OpenGallery()
     {
@@ -122,8 +228,7 @@ public class AdminPickActivity extends AppCompatActivity {
         City = InputCity.getText().toString();
         County = InputCounty.getText().toString();
         description = InputDescription.getText().toString();
-
-
+        link = InputLink.getText().toString();
 
         if (ImageUri == null)
         {
@@ -148,6 +253,10 @@ public class AdminPickActivity extends AppCompatActivity {
         else if (TextUtils.isEmpty(description))
         {
             Toast.makeText(this, "Please write a Description",  Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(link))
+        {
+            Toast.makeText(this, "Please enter a Link",  Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -238,6 +347,10 @@ public class AdminPickActivity extends AppCompatActivity {
         locationMap.put("county", County);
         locationMap.put("category", category);
         locationMap.put("description", description);
+        locationMap.put("link", link);
+        Log.e("latID", ""+ latId);
+        locationMap.put("lat", latId);
+        locationMap.put("lng", lngId);
 
         
         LocationRef.child(locationRandomKey).updateChildren(locationMap)
@@ -280,5 +393,10 @@ public class AdminPickActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+
     }
 }

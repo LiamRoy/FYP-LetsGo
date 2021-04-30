@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fyp_staycation">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -13,12 +12,19 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/letsgo"
+        android:label=""
+        android:roundIcon="@drawable/letsgo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FYPStayCation">
-
+        <activity android:name=".MyParticipantsActivity"></activity>
+        <activity
+            android:name=".ViewProfileActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
+        <activity
+            android:name=".NearMeActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
+        <activity android:name=".MyTripActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -31,19 +37,31 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".FilterActivity" />
-        <activity android:name=".ParticipantsActivity" />
-        <activity android:name=".TripsActivity" />
-        <activity android:name=".CreateTripActivity" />
-        <activity android:name=".ChatActivity" />
-        <activity android:name=".GroupChatActivity" />
-        <activity android:name=".LocationDetailsActivity" />
+        <activity
+            android:name=".ParticipantsActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
+        <activity android:name=".TripsActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar"/>
+        <activity
+            android:name=".CreateTripActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
+        <activity
+            android:name=".ChatActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
+        <activity
+            android:name=".GroupChatActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
+        <activity
+            android:name=".LocationDetailsActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
         <activity android:name=".AdminPickActivity" />
         <activity android:name=".AdminActivity" />
         <activity
             android:name=".AdminLogin"
             android:theme="@style/Theme.FYPStayCation.NoActionBar" />
-        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.FYPStayCation.NoActionBar">
@@ -56,7 +74,9 @@
         <activity
             android:name=".RegisterUser"
             android:theme="@style/Theme.FYPStayCation.NoActionBar" />
-        <activity android:name=".ProfileActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_key"

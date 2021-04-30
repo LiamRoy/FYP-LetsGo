@@ -2,11 +2,15 @@ package com.example.fyp_staycation;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -39,17 +43,62 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
-    private ImageView InputProductImage;
+    private ImageView InputProductImage,profileImage;
     private static final int GalleryPick = 1;
     private Uri ImageUri;
     private String locationRandomKey, downloadImageUrl;
     private StorageReference profileImagesRef;
     private ProgressDialog loadingBar;
+    private Toolbar toolbar;
+    private TextView homeTitle;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        //RUNNING MENU2.XML OVER ACTIVITY
+        inflater.inflate(R.menu.menu1, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.tripNearMe:
+                Intent intentMap = new Intent(ProfileActivity.this, NearMeActivity.class);
+                startActivity(intentMap);
+                break;
+            case R.id.home:
+                Intent intentHome = new Intent(ProfileActivity.this, HomeActivity.class);
+                startActivity(intentHome);
+                break;
+            case R.id.View:
+                Intent intentProfile = new Intent(ProfileActivity.this, ProfileActivity.class);
+                startActivity(intentProfile);
+                break;
+            case R.id.Trips:
+                Intent intentTrip = new Intent(ProfileActivity.this, TripsActivity.class);
+                startActivity(intentTrip);
+                break;
+            case R.id.Connections:
+                Intent intentGroup = new Intent(ProfileActivity.this, GroupChatActivity.class);
+                //intentGroup.putExtra("lid",locations.getLid());
+                startActivity(intentGroup);
+                break;
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(ProfileActivity.this,MainActivity.class));
+        }
+
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        toolbar = findViewById(R.id.homeToolbar);
+        setSupportActionBar(toolbar);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("User");
@@ -57,7 +106,9 @@ public class ProfileActivity extends AppCompatActivity {
         profileImagesRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
         loadingBar = new ProgressDialog(this);
 
+        homeTitle = (TextView) findViewById(R.id.homeTitle);
         InputProductImage = (ImageView) findViewById(R.id.profile_image_details);
+        profileImage = (ImageView) findViewById(R.id.profileImage);
         //final TextView profiletext = (TextView) findViewById(R.id.txtProfile);
         final TextView usernametext = (TextView) findViewById(R.id.profileUsername);
         final TextView emailtext = (TextView) findViewById(R.id.profileEmail);
@@ -65,7 +116,7 @@ public class ProfileActivity extends AppCompatActivity {
         final TextView phonetext = (TextView) findViewById(R.id.profileNumber);
 
 
-        InputProductImage.setOnClickListener(new View.OnClickListener() {
+        profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
@@ -82,10 +133,12 @@ public class ProfileActivity extends AppCompatActivity {
                     String email = userProfile.getEmail();
                     String description = userProfile.getDescription();
                     String phoneNum = userProfile.getPhoneNum();
+                    Picasso.get().load(userProfile.getImage()).into(profileImage);
                     Picasso.get().load(userProfile.getImage()).into(InputProductImage);
 
                     //profiletext.setText("Welcome " + username);
                     usernametext.setText(username);
+                    homeTitle.setText("Hi " + username);
                     emailtext.setText(email);
                     descriptionText.setText(description);
                     phonetext.setText(phoneNum);
@@ -118,8 +171,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (requestCode==GalleryPick  &&  resultCode==RESULT_OK  &&  data!=null)
         {
             ImageUri = data.getData();
-            InputProductImage.setImageURI(ImageUri);
-            
+            profileImage.setImageURI(ImageUri);
         }
         storeInformation();
     }

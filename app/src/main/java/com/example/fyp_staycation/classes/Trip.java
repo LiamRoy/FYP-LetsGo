@@ -6,6 +6,7 @@ public class Trip {
 
     private String tripTitle;
     private String date;
+    private String meettime;
     private String tid;
     private String createdBy;
     private String participants;
@@ -16,9 +17,18 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(String tripTitle, String date, String tid, String createdBy, String participants, double lat, double lng, String address) {
+    public Trip(String tripTitle,String date, String createdBy,String meettime,String tid){
+        this.tripTitle=tripTitle;
+        this.date=date;
+        this.createdBy=createdBy;
+        this.tid=tid;
+        this.meettime=meettime;
+    }
+
+    public Trip(String tripTitle, String date,String meettime, String tid, String createdBy, String participants, double lat, double lng, String address) {
         this.tripTitle = tripTitle;
         this.date = date;
+        this.meettime=meettime;
         this.tid = tid;
         this.createdBy = createdBy;
         this.participants = participants;
@@ -89,5 +99,13 @@ public class Trip {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getMeettime() {
+        return meettime;
+    }
+
+    public void setMeettime(String meettime) {
+        this.meettime = meettime;
     }
 }

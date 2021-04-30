@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,7 +38,7 @@ import java.util.HashMap;
 
 public class ChatActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
-    private String groupID;
+    private String groupID, name,image;
     private TextView groupTitle;
     private EditText etMessage;
     private ImageButton sendBtn;
@@ -45,6 +46,13 @@ public class ChatActivity extends AppCompatActivity {
     private RecyclerView chatRv;
     private ArrayList<Messages> messagesArrayList;
     private ChatAdapter chatAdapter;
+
+    public ChatActivity(){
+
+    }
+    public ChatActivity(String name) {
+        this.name = name;
+    }
 
 
     @Override
@@ -84,6 +92,25 @@ public class ChatActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         Intent intent = getIntent();
         groupID = intent.getStringExtra("groupId");
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
+        databaseReference.child(firebaseAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if(user!=null){
+                    name = user.getUsername();
+                    image = user.getImage();
+                    Log.e("testing123", image);
+                }
+                Log.e("test", "test");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         loadGroupInfo();
         loadMessages();
@@ -149,7 +176,6 @@ public class ChatActivity extends AppCompatActivity {
                         for (DataSnapshot ds: snapshot.getChildren()){
                             String Title = "" + ds.child("groupId").getValue();
                             groupTitle.setText(Title);
-
                         }
                     }
 
@@ -167,10 +193,13 @@ public class ChatActivity extends AppCompatActivity {
 
         HashMap<String, Object> hashMap = new HashMap<>();
 
-        hashMap.put("sender", firebaseAuth.getCurrentUser().getEmail());
+        hashMap.put("sender", name);
         hashMap.put("message", message);
         hashMap.put("timestamp", timestamp);
         hashMap.put("type","text");
+        hashMap.put("image", image);
+        Messages messages = new Messages();
+        messages.setImage(image);
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Connections");
                 dbRef.child(groupID).child("Messages").child(timestamp).setValue(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

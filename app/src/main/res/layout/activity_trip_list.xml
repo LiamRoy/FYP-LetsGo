@@ -4,14 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/backround_gradient"
     tools:context=".TripsActivity">
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvGroup"
+        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/row_trip_list"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        >
 
     </androidx.recyclerview.widget.RecyclerView>
 

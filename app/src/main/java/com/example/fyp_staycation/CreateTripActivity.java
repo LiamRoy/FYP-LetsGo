@@ -2,10 +2,12 @@ package com.example.fyp_staycation;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -14,16 +16,21 @@ import android.location.Location;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.fyp_staycation.classes.Connections;
 import com.example.fyp_staycation.classes.Locations;
 import com.example.fyp_staycation.classes.Trip;
+import com.example.fyp_staycation.classes.User;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -45,16 +52,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 public class CreateTripActivity extends AppCompatActivity {
 
     private TextView title, county;
-    private EditText date;
+    private EditText date,meetTime;
     private DatePickerDialog picker;
     private String location = "";
     private FirebaseUser user;
@@ -68,18 +78,67 @@ public class CreateTripActivity extends AppCompatActivity {
     //private TextView latLng;
     private int PLACE_PICKER_REQUEST = 1;
     private Geocoder geocoder;
-    private String name,countyName;
+    private String name,countyName,username;
     private GoogleMap map;
     private OnMapReadyCallback onMapReadyCallback;
     private LatLng latLng;
     private String cords;
+    private double latId, lngId, latId1, lngId1;
+    private String image;
+    private Toolbar toolbar;
+    private TextView homeTitle;
+    private Locations locations;
 
     private GoogleMap.OnMapClickListener mapClickListener;
     public CreateTripActivity(){
 
     }
-    public CreateTripActivity(String name, String countyName) {
+    public CreateTripActivity(String image,String name, String countyName,String username, double latId, double lngId) {
         this.countyName = countyName;
+        this.image=image;
+        this.username = username;
+        this.latId=latId;
+        this.lngId=lngId;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        //RUNNING MENU2.XML OVER ACTIVITY
+        inflater.inflate(R.menu.menu1, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.tripNearMe:
+                Intent intentMap = new Intent(CreateTripActivity.this, NearMeActivity.class);
+                startActivity(intentMap);
+                break;
+            case R.id.home:
+                Intent intentHome = new Intent(CreateTripActivity.this, HomeActivity.class);
+                startActivity(intentHome);
+                break;
+            case R.id.View:
+                Intent intentProfile = new Intent(CreateTripActivity.this, ProfileActivity.class);
+                startActivity(intentProfile);
+                break;
+            case R.id.Trips:
+                Intent intentTrip = new Intent(CreateTripActivity.this, TripsActivity.class);
+                startActivity(intentTrip);
+                break;
+            case R.id.Connections:
+                Intent intentGroup = new Intent(CreateTripActivity.this, GroupChatActivity.class);
+                intentGroup.putExtra("lid",locations.getLid());
+                startActivity(intentGroup);
+                break;
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(CreateTripActivity.this,MainActivity.class));
+        }
+
+        return true;
     }
 
     @Override
@@ -94,15 +153,23 @@ public class CreateTripActivity extends AppCompatActivity {
             location = extras.getString("groupId");
         }
 
+        locations = new Locations();
+        toolbar = findViewById(R.id.homeToolbar);
+        setSupportActionBar(toolbar);
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Locations");
         databaseReference.child(location).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Locations locations = snapshot.getValue(Locations.class);
                 if(locations!=null){
+                    title.setText(locations.getTitle());
                     name = locations.getCity();
                     countyName = locations.getCounty();
-                    Log.e("test", countyName);
+                    latId = locations.getLat();
+                    lngId = locations.getLng();
+                    Log.e("test", String.valueOf(latId));
+                    county.setText("County " + countyName);
                 }
                 Log.e("test", "test");
             }
@@ -117,11 +184,29 @@ public class CreateTripActivity extends AppCompatActivity {
         newUsername = "";
         user = FirebaseAuth.getInstance().getCurrentUser();
         tripDB = FirebaseDatabase.getInstance().getReference().child("Trips");
-        userDB = FirebaseDatabase.getInstance().getReference().child("Users");
+        userDB = FirebaseDatabase.getInstance().getReference().child("User");
         user1 = user.getUid();
         title = (TextView) findViewById(R.id.tripTitle);
         county = (TextView) findViewById(R.id.tripCounty);
-        getLocationDetails(location);
+        //getLocationDetails(location);
+
+
+        userDB.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if(user!=null){
+                    username = user.getUsername();
+                    image = user.getImage();
+                    Log.e("test", username);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.tripMap);
         client = LocationServices.getFusedLocationProviderClient(this);
@@ -132,6 +217,34 @@ public class CreateTripActivity extends AppCompatActivity {
         else{
             ActivityCompat.requestPermissions(CreateTripActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44 );
         }
+
+        meetTime = (EditText) findViewById(R.id.pickTime);
+        meetTime.setInputType(InputType.TYPE_NULL);
+        meetTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final TimePickerDialog timePicker = new TimePickerDialog(CreateTripActivity.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                int hour,min;
+                                hour = hourOfDay;
+                                min=minute;
+                                String time = hourOfDay + ":" + minute;
+                                SimpleDateFormat f24hours = new SimpleDateFormat("HH:mm");
+                                try {
+                                    Date date = f24hours.parse(time);
+                                    SimpleDateFormat f12hours = new SimpleDateFormat("hh:mm aa");
+                                    meetTime.setText(f12hours.format(date));
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },12 ,0 ,false);
+                timePicker.show();
+            }
+        });
+
 
         date = (EditText) findViewById(R.id.pickDate);
         date.setInputType(InputType.TYPE_NULL);
@@ -153,7 +266,6 @@ public class CreateTripActivity extends AppCompatActivity {
                 picker.show();
             }
         });
-
         createTrip2 = (FloatingActionButton) findViewById(R.id.createTripBtn2);
         createTrip2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,17 +273,6 @@ public class CreateTripActivity extends AppCompatActivity {
                 createTrip();
             }
         });
-
-//        btnPicker = (Button) findViewById(R.id.mapBtn);
-//        latLng = (TextView) findViewById(R.id.LatLng);
-
-//        btnPicker.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //PlacePicker.
-//            }
-//        });
-
     }
 
     private void getCurrentLocation() {
@@ -204,12 +305,12 @@ public class CreateTripActivity extends AppCompatActivity {
 //                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
 //                            googleMap.addMarker(options);
                             try {
-                                List<Address> addressList = geocoder.getFromLocationName(name, 1);
+                                List<Address> addressList = geocoder.getFromLocation(latId, lngId, 1);
                                 if(addressList.size()>0) {
                                     Address address = addressList.get(0);
                                     latLng = new LatLng(address.getLatitude(), address.getLongitude());
                                     MarkerOptions options = new MarkerOptions().position(new LatLng(address.getLatitude(), address.getLongitude()))
-                                            .title(address.getLocality());
+                                            .title(address.getLocality()).title("Location of Trip");
                                     map.addMarker(options);
                                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
@@ -217,32 +318,35 @@ public class CreateTripActivity extends AppCompatActivity {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
+                            map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+                                @Override
+                                public void onMapLongClick(LatLng latLng1) {
+
+                                    Log.d("test", "onMapLongClick: " + latLng1.toString());
+                                    latLng1 = new LatLng(latLng1.latitude, latLng1.longitude);
+                                    try {
+                                        List<Address> addresses = geocoder.getFromLocation(latLng1.latitude, latLng1.longitude, 1);
+                                        if (addresses.size() > 0) {
+                                            Address address = addresses.get(0);
+                                            latLng1 = new LatLng(address.getLatitude(), address.getLongitude());
+                                            MarkerOptions newOptions = new MarkerOptions().position(new LatLng(address.getLatitude(), address.getLongitude()))
+                                                    .title(address.getLocality()).title("Meet Up Point Set");
+                                            map.addMarker(newOptions);
+                                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng1, 15));
+                                            latId1 = latLng1.latitude;
+                                            lngId1 = latLng1.longitude;
+                                        }
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+
                         }
                     });
                 }
             }
         });
-
-        mapClickListener = new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                Log.d("test", "onMapLongClick: " + latLng.toString());
-                try {
-                    List<Address> addresses = geocoder.getFromLocation(Double.parseDouble(countyName), latLng.longitude, 1);
-                    if (addresses.size() > 0) {
-                        Address address = addresses.get(0);
-                        String streetAddress = address.getAddressLine(0);
-                        map.addMarker(new MarkerOptions()
-                                .position(latLng)
-                                .title(streetAddress)
-                                .draggable(true)
-                        );
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
     }
 
     @Override
@@ -255,7 +359,6 @@ public class CreateTripActivity extends AppCompatActivity {
     }
 
     private void createTrip() {
-
 
         /*userDB.child(user1).addValueEventListener(new ValueEventListener() {
             @Override
@@ -282,15 +385,15 @@ public class CreateTripActivity extends AppCompatActivity {
 
         final HashMap<String, Object> trip = new HashMap<>();
 
-        double latId= latLng.latitude;
-        double lngId= latLng.longitude;
-        trip.put("createdBy", user.getEmail());
+        trip.put("createdBy", username);
         trip.put("tid", timestamp);
         trip.put("tripTitle", location);
         trip.put("date", date.getText().toString());
-        trip.put("lat", latId);
-        trip.put("lng", lngId);
+        trip.put("meettime", meetTime.getText().toString());
+        trip.put("lat", latId1);
+        trip.put("lng", lngId1);
         trip.put("address", name);
+
 
         tripDB.child(timestamp).updateChildren(trip)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -303,10 +406,13 @@ public class CreateTripActivity extends AppCompatActivity {
                         //members.put("Username", newUsername);
                         members.put("userEmail", user.getEmail());
                         members.put("uid", user.getUid());
+                        members.put("username", username);
+                        members.put("image", image);
                         Trip trip1 = new Trip();
                         trip1.setTid(timestamp);
                         trip1.setDate(date.getText().toString());
-                        trip1.setCreatedBy(user.getEmail());
+                        trip1.setMeettime(meetTime.getText().toString());
+                        trip1.setCreatedBy(username);
                         trip1.setTripTitle(location);
                         trip1.setLat(latId);
                         trip1.setLng(lngId);
@@ -329,32 +435,30 @@ public class CreateTripActivity extends AppCompatActivity {
 
     }
 
-    private void getLocationDetails(String location) {
-
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Connections");
-        reference.child(location).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    Connections connections = snapshot.getValue(Connections.class);
-                    if(connections != null){
-                        title.setText(connections.getGroupId());
-
-                    }
-                    else {
-                        System.out.println("Error");
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
+//    private void getLocationDetails(String location) {
+//
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Connections");
+//        reference.child(location).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()){
+//                    Connections connections = snapshot.getValue(Connections.class);
+//                    if(connections != null){
+//                        title.setText(connections.getCtitle());
+//                    }
+//                    else {
+//                        System.out.println("Error");
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//    }
 
     public void setCountyName(String countyName) {
         this.countyName = countyName;

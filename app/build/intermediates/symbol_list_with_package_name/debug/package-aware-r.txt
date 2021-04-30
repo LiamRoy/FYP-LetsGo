@@ -1056,6 +1056,8 @@ color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
+color chatLoggedIn
+color chat_box_background
 color checkbox_themeable_attribute_color
 color colorAccent
 color colorPrimary
@@ -1117,8 +1119,10 @@ color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
 color foreground_material_light
+color group_icon_background
 color headerBackground
 color headerTextColor
+color heart_background
 color highlighted_text_material_dark
 color highlighted_text_material_light
 color hintTextColor
@@ -1742,6 +1746,7 @@ drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable button_shape
 drawable camera
+drawable chat_box_foreground
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -1770,12 +1775,17 @@ drawable design_snackbar_background
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable graduation_black
+drawable group_icon_foreground
+drawable ic_add_pic
 drawable ic_add_trip_24
 drawable ic_baseline_add_a_photo_24
+drawable ic_cancel
 drawable ic_clock_black_24dp
+drawable ic_heart
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_link
 drawable ic_lock_white_24dp
 drawable ic_menu_camera
 drawable ic_menu_gallery
@@ -1787,6 +1797,7 @@ drawable ic_mtrl_chip_close_circle
 drawable ic_person_white_24dp
 drawable ic_search_background
 drawable ic_search_foreground
+drawable letsgo
 drawable material_cursor_drawable
 drawable material_ic_calendar_black_24dp
 drawable material_ic_clear_black_24dp
@@ -1832,7 +1843,6 @@ id CTRL
 id Category
 id Connections
 id FUNCTION
-id Filter
 id Layout
 id META
 id NO_DEBUG
@@ -1846,7 +1856,6 @@ id TOP_END
 id TOP_START
 id Trips
 id View
-id Welcome
 id accelerate
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
@@ -1911,6 +1920,7 @@ id all
 id always
 id animateToEnd
 id animateToStart
+id appImage
 id asConfigured
 id async
 id attempts
@@ -1978,6 +1988,7 @@ id custom
 id customPanel
 id cut
 id dark
+id dateTrip
 id date_picker_actions
 id decelerate
 id decelerateAndComplete
@@ -2049,6 +2060,8 @@ id header_title
 id hideable
 id home
 id homeAsUp
+id homeTitle
+id homeToolbar
 id honorRequest
 id hybrid
 id icon
@@ -2075,7 +2088,6 @@ id jumpToStart
 id labelGroup
 id labeled
 id largeLabel
-id lat
 id layout
 id left
 id leftToRight
@@ -2084,9 +2096,12 @@ id light
 id line1
 id line3
 id linear
+id link
+id linkImage
 id listMode
+id listTitle
 id list_item
-id lng
+id locMap
 id locationCity
 id locationFilter
 id locationTitle
@@ -2094,6 +2109,7 @@ id location_county
 id location_description
 id location_image_details
 id logout
+id mapToolbar
 id masked
 id material_clock_display
 id material_clock_face
@@ -2115,6 +2131,7 @@ id material_timepicker_ok_button
 id material_timepicker_view
 id material_value_index
 id media_actions
+id meetTime
 id message
 id messageEt
 id messageTv
@@ -2156,6 +2173,7 @@ id nameTv
 id nav_controller_view_tag
 id nav_host_fragment_container
 id navigation_header_container
+id nearMeMap
 id never
 id noScroll
 id none
@@ -2180,11 +2198,13 @@ id peekHeight
 id percent
 id pick
 id pickDate
+id pickTime
 id pin
 id position
 id postLayout
 id profileDescription
 id profileEmail
+id profileImage
 id profileNumber
 id profileUsername
 id profile_image_details
@@ -2217,6 +2237,7 @@ id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
 id scrollable
+id searchBtn
 id search_badge
 id search_bar
 id search_button
@@ -2235,6 +2256,7 @@ id sendBtn
 id shortcut
 id showCustom
 id showHome
+id showMyTrips
 id showTitle
 id sin
 id skipCollapsed
@@ -2254,6 +2276,7 @@ id src_atop
 id src_in
 id src_over
 id standard
+id star
 id start
 id startHorizontal
 id startToEnd
@@ -2281,6 +2304,7 @@ id test_radiobutton_android_button_tint
 id test_radiobutton_app_button_tint
 id text
 id text2
+id textBtn
 id textEnd
 id textSpacerNoButtons
 id textSpacerNoTitle
@@ -2304,6 +2328,7 @@ id title
 id titleDividerNoCustom
 id title_template
 id toggle
+id toolbar
 id top
 id topPanel
 id top_overlay
@@ -2318,7 +2343,10 @@ id transition_transform
 id triangle
 id tripCounty
 id tripDate
+id tripId
 id tripMap
+id tripNearMe
+id tripTime
 id tripTitle
 id txtAdmin
 id txtregister
@@ -2327,7 +2355,6 @@ id uniform
 id unlabeled
 id up
 id useLogo
-id userEmail
 id userName
 id userRv
 id view_offset_helper
@@ -2414,9 +2441,13 @@ layout activity_group_chat
 layout activity_home
 layout activity_location_details
 layout activity_main
+layout activity_my_participants
+layout activity_my_trip
+layout activity_near_me
 layout activity_participants
 layout activity_profile
 layout activity_trip_list
+layout activity_view_profile
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
 layout custom_dialog
@@ -2521,11 +2552,18 @@ layout text_view_with_line_height_from_layout
 layout text_view_with_line_height_from_style
 layout text_view_with_theme_line_height
 layout text_view_without_line_height
+layout toolbar
 menu chat_menu
 menu filter_menu
 menu menu1
 menu menu2
 menu search
+menu trip_menu
+mipmap chat_box
+mipmap chat_box_round
+mipmap group_icon
+mipmap group_icon_round
+mipmap heart
 mipmap ic_launcher
 mipmap ic_launcher_round
 mipmap ic_search

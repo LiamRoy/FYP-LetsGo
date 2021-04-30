@@ -17,5 +17,6 @@
     <color name="profileTextBackground">#F0F2F4</color>
     <color name="textColor">#FFFFFF</color>
     <color name="linkTextColor">#C8DCE9</color>
+    <color name="chatLoggedIn">#98E467</color>
 
 </resources>

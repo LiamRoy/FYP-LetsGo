@@ -1,9 +1,11 @@
 package com.example.fyp_staycation.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.text.format.DateFormat;
 import android.widget.Toast;
@@ -13,12 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fyp_staycation.R;
 import com.example.fyp_staycation.classes.Messages;
+import com.example.fyp_staycation.classes.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
@@ -31,6 +35,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.HolderChat> {
     private static final int MSG_TYPE_LEFT = 0;
     private static final int MSG_TYPE_RIGHT = 1;
 
+    String name;
+    String image;
     private Context context;
     private List<Messages> messagesList;
     private List<Messages> items2;
@@ -41,6 +47,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.HolderChat> {
     public ChatAdapter(Context context, List<Messages>messagesList){
         this.context=context;
         this.messagesList=messagesList;
+        this.image = image;
         items2=new ArrayList<>(messagesList);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -77,6 +84,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.HolderChat> {
         String timestamp = messages.getTimestamp();
         String message = messages.getMessage();
         String senderId = messages.getSender();
+        String image = messages.getImage();
 
         Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
         calendar.setTimeInMillis(Long.parseLong(timestamp));
@@ -102,6 +110,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.HolderChat> {
         holder.messageTv.setText(message);
         holder.timeTv.setText(dateTime);
         holder.nameTv.setText(senderId);
+        Picasso.get().load(image).into(holder.imageView);
         //setUserName(messages, holder);
     }
 
@@ -136,8 +145,24 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.HolderChat> {
     @Override
     public int getItemViewType(int position) {
         Messages messages = messagesList.get(position);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
+        databaseReference.child(firebaseAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if(user!=null){
+                    name = user.getUsername();
+                    Log.e("test", name);
+                }
+                Log.e("test", "test");
+            }
 
-        if(messagesList.get(position).getSender().equals(firebaseAuth.getCurrentUser().getEmail())){
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        if(messagesList.get(position).getSender().equals(name)){
             return MSG_TYPE_RIGHT;
         }
         else{
@@ -147,6 +172,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.HolderChat> {
 
     public static class HolderChat extends RecyclerView.ViewHolder{
 
+        private ImageView imageView;
         private TextView nameTv, messageTv, timeTv;
         public HolderChat(@NonNull View itemView) {
             super(itemView);
@@ -154,6 +180,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.HolderChat> {
             nameTv = itemView.findViewById(R.id.nameTv);
             messageTv = itemView.findViewById(R.id.messageTv);
             timeTv = itemView.findViewById(R.id.timeTv);
+            imageView = itemView.findViewById(R.id.profile_image_details);
 
         }
     }

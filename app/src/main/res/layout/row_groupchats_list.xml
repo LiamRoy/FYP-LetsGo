@@ -9,44 +9,45 @@
     >
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="411dp"
+        android:layout_height="69dp">
 
 
         <TextView
             android:id="@+id/groupTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-
             android:layout_marginStart="4dp"
-            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="4dp"
             android:textColor="@color/black"
-            />
+            android:textSize="18sp" />
+
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:text="Sender Name"
             android:layout_below="@id/groupTitle"
             android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:textStyle="bold"
             android:singleLine="true"
-            android:textColor="@color/black"/>
+            android:text="Sender Name"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/groupTitle"
-            android:layout_toEndOf="@id/name"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="2dp"
-            android:singleLine="true"
-            android:text="The message"
+            android:layout_toEndOf="@id/name"
             android:layout_toRightOf="@id/name"
-            android:layout_marginLeft="5dp" />
+            android:singleLine="false"
+            android:text="The message" />
 
         <TextView
             android:id="@+id/time"
@@ -54,11 +55,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/name"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="5dp"
-            android:singleLine="true"
-            android:text="Time"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp" />
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:singleLine="true"
+            android:text="Time" />
 
     </RelativeLayout>
 

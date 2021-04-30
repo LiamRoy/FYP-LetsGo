@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Member;
 
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button signIn;
     private TextView attempt;
     private int counter = 5;
+    private ImageView imageView;
 
 
     private FirebaseAuth auth;
@@ -53,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         register.setOnClickListener(this);
         editEmail = (EditText) findViewById(R.id.etName);
         editPassword = (EditText) findViewById(R.id.etPassword);
+
+        imageView = (ImageView) findViewById(R.id.appImage);
+
 
         signIn = (Button) findViewById(R.id.btnLogin);
         signIn.setOnClickListener(this);

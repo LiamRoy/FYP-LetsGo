@@ -7,7 +7,6 @@
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="30" />
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -30,13 +29,20 @@
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/letsgo"
+        android:label=""
+        android:roundIcon="@drawable/letsgo"
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.FYPStayCation" >
-
+        <activity android:name="com.example.fyp_staycation.MyParticipantsActivity" />
+        <activity
+            android:name="com.example.fyp_staycation.ViewProfileActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
+        <activity
+            android:name="com.example.fyp_staycation.NearMeActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
+        <activity android:name="com.example.fyp_staycation.MyTripActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -49,19 +55,32 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name="com.example.fyp_staycation.FilterActivity" />
-        <activity android:name="com.example.fyp_staycation.ParticipantsActivity" />
-        <activity android:name="com.example.fyp_staycation.TripsActivity" />
-        <activity android:name="com.example.fyp_staycation.CreateTripActivity" />
-        <activity android:name="com.example.fyp_staycation.ChatActivity" />
-        <activity android:name="com.example.fyp_staycation.GroupChatActivity" />
-        <activity android:name="com.example.fyp_staycation.LocationDetailsActivity" />
+        <activity
+            android:name="com.example.fyp_staycation.ParticipantsActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
+        <activity
+            android:name="com.example.fyp_staycation.TripsActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
+        <activity
+            android:name="com.example.fyp_staycation.CreateTripActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
+        <activity
+            android:name="com.example.fyp_staycation.ChatActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
+        <activity
+            android:name="com.example.fyp_staycation.GroupChatActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
+        <activity
+            android:name="com.example.fyp_staycation.LocationDetailsActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
         <activity android:name="com.example.fyp_staycation.AdminPickActivity" />
         <activity android:name="com.example.fyp_staycation.AdminActivity" />
         <activity
             android:name="com.example.fyp_staycation.AdminLogin"
             android:theme="@style/Theme.FYPStayCation.NoActionBar" />
-        <activity android:name="com.example.fyp_staycation.HomeActivity" />
+        <activity
+            android:name="com.example.fyp_staycation.HomeActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
         <activity
             android:name="com.example.fyp_staycation.MainActivity"
             android:theme="@style/Theme.FYPStayCation.NoActionBar" >
@@ -74,7 +93,9 @@
         <activity
             android:name="com.example.fyp_staycation.RegisterUser"
             android:theme="@style/Theme.FYPStayCation.NoActionBar" />
-        <activity android:name="com.example.fyp_staycation.ProfileActivity" />
+        <activity
+            android:name="com.example.fyp_staycation.ProfileActivity"
+            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_key"

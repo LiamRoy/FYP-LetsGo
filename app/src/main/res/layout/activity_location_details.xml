@@ -7,17 +7,39 @@
     android:layout_height="match_parent"
     android:background="@drawable/backround_gradient"
     tools:context=".LocationDetailsActivity">
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
 
     <ImageView
         android:id="@+id/location_image_details"
         android:layout_width="match_parent"
-        android:layout_height="444dp"
+        android:layout_height="185dp"
+        android:layout_below="@id/toolbar"
         android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/linkImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginLeft="-30dp"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@id/location_image_details"
+        android:foregroundGravity="bottom"
+        android:src="@drawable/ic_link"
+        />
+
+    <fragment
+        android:id="@+id/locMap"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/location_image_details" />
     <TextView
         android:id="@+id/locationTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/location_image_details"
+        android:layout_below="@id/locMap"
         android:text="Title"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -60,15 +82,38 @@
         android:gravity="center"
         android:layout_marginTop="10dp"/>
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/joinBtn"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/location_description"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/button_shape"
-        android:text="Join Location" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginTop="700dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:foregroundGravity="bottom"
+        android:backgroundTint="@color/profileBackground"
+        android:padding="10dp"
+        android:src="@drawable/ic_heart" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="start|bottom"
+        android:layout_marginTop="700dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:backgroundTint="@color/profileBackground"
+        android:foregroundGravity="bottom"
+        android:padding="10dp"
+        android:src="@drawable/ic_cancel"
+        />
+
+
 
 
 </RelativeLayout>

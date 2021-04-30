@@ -2,13 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/tripNearMe"
+        android:title="Show trips near me"
+        app:showAsAction="never"/>
+
     <item android:id="@+id/home"
         android:title="Home"
         app:showAsAction="never"
         />
-    <item android:id="@+id/Filter"
-        android:title="Pick County"
-        app:showAsAction="never"/>
 
     <item android:id="@+id/View"
         android:title="View Profile"

@@ -4,57 +4,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backround_gradient"
     tools:context=".ParticipantsActivity">
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
 
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
         android:text="test"
+        android:textColor="@color/white"
         android:textAlignment="center"
         android:gravity="center_horizontal"
         />
     <TextView
-    android:id="@+id/lat"
+    android:id="@+id/dateTrip"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="test"
+        android:textColor="@color/white"
     android:textAlignment="center"
         android:layout_below="@id/title"
     android:gravity="center_horizontal"
     />
     <TextView
-        android:id="@+id/lng"
+        android:id="@+id/meetTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="test"
+        android:text="Meeting time"
+        android:textColor="@color/white"
         android:textAlignment="center"
-        android:layout_below="@id/lat"
+        android:layout_below="@id/dateTrip"
         android:gravity="center_horizontal"
         />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/joinButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
-        android:layout_marginTop="33dp"
-        android:text="Join Trip" />
+        android:layout_below="@id/tripMap"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginRight="22dp"
+        android:foregroundGravity="bottom"
+        android:padding="10dp"
+        android:src="@drawable/ic_add_trip_24" />
 
     <fragment
         android:id="@+id/tripMap"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="211dp"
-        android:layout_below="@id/joinButton" />
+        android:layout_height="251dp"
+        android:layout_below="@id/meetTime" />
+
+    <TextView
+        android:id="@+id/listTitle"
+        android:layout_width="215dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/tripMap"
+        android:gravity="center_horizontal"
+        android:text="List Of Participants"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textBtn"
+        android:layout_width="117dp"
+        android:layout_height="61dp"
+        android:layout_below="@id/tripMap"
+        android:layout_toRightOf="@id/listTitle"
+        android:gravity="center_horizontal"
+        android:text="Click Button to join Trip!"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userRv"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_below="@id/tripMap"
-        android:layout_marginTop="-2dp">
+        android:layout_height="322dp"
+        android:layout_below="@id/listTitle"
+        android:layout_marginTop="15dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 

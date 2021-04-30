@@ -6,78 +6,16 @@ import java.util.List;
 
 public class Locations {
 
-    private String image, title, category, city, county, lid, date, time, description;
-
+    private String image, title, category, city, county, lid, date, time, description,link;
+    private double lat;
+    private double lng;
     private Connections connection;
 
     public Locations(){
 
     }
 
-    static class Connections {
-
-
-        private String user;
-        private String title;
-        private String city;
-        private String county;
-        private String date;
-        private String reference;
-
-        public Connections(){
-        }
-
-        public Connections(String user,String title, String city, String county, String date,String reference) {
-            this.user=user;
-            this.title = title;
-            this.city = city;
-            this.county = county;
-            this.date = date;
-            this.reference=reference;
-        }
-        public String getReference(){return reference;}
-
-        public void setReference(String reference){this.reference=reference;}
-
-        public String getUser(){
-            return user;}
-        public void setUser(String user){this.user=user;}
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getCity() {
-            return city;
-        }
-
-        public void setCity(String city) {
-            this.city = city;
-        }
-
-        public String getCounty() {
-            return county;
-        }
-
-        public void setCounty(String county) {
-            this.county = county;
-        }
-
-        public String getDate() {
-            return date;
-        }
-
-        public void setDate(String date) {
-            this.date = date;
-        }
-    }
-
-    public Locations(String image, String title, String category, String city, String county, String lid, String date, String time,String description, Connections connection) {
-
+    public Locations(String image, String title, String category, String city, String county, String lid, String date, String time, String description,String link, double lat, double lng, Connections connection) {
         this.image = image;
         this.title = title;
         this.category = category;
@@ -87,6 +25,9 @@ public class Locations {
         this.date = date;
         this.time = time;
         this.description = description;
+        this.link=link;
+        this.lat = lat;
+        this.lng = lng;
         this.connection = connection;
     }
 
@@ -162,7 +103,35 @@ public class Locations {
         this.description = description;
     }
 
-    public Connections getConnections(){return connection;}
+    public double getLat() {
+        return lat;
+    }
 
-    public void setConnections(Connections connections){this.connection=connection;}
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public Connections getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connections connection) {
+        this.connection = connection;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 }

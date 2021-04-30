@@ -2,16 +2,17 @@ package com.example.fyp_staycation.classes;
 
 public class Messages {
 
-    String message, sender,timestamp,type;
+    String message, sender,timestamp,type,image;
 
     public Messages() {
     }
 
-    public Messages(String message, String sender, String timestamp, String type) {
+    public Messages(String message, String sender, String timestamp, String type, String image) {
         this.message = message;
         this.sender = sender;
         this.timestamp = timestamp;
         this.type = type;
+        this.image = image;
     }
 
     public String getMessage() {
@@ -44,5 +45,13 @@ public class Messages {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

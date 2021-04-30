@@ -1,5 +1,7 @@
 package com.example.fyp_staycation;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +19,18 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.ViewHolder> implements Filterable {
+import static androidx.core.content.ContextCompat.startActivity;
 
+public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.ViewHolder> {
+
+    private android.content.Context context;
     private List<Locations> items;
     private List<Locations> items2;
     public ItemClickListener listener;
 
-    public CardStackAdapter(List<Locations> items) {
+    public CardStackAdapter(Context context, List<Locations> items) {
         super();
+        this.context=context;
         this.items = items;
         items2=new ArrayList<>(items);
 
@@ -41,13 +47,22 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Locations locations = items.get(position);
-
-
         holder.title.setText(locations.getTitle());
         holder.category.setText(locations.getCategory());
         holder.city.setText(locations.getCity());
         holder.county.setText(locations.getCounty());
         Picasso.get().load(locations.getImage()).into(holder.image);
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,LocationDetailsActivity.class);
+                intent.putExtra("lid",locations.getLid());
+                startActivity(context, intent, null);
+            }
+        });
+
     }
 
     public void setItem(List<Locations> items) {
@@ -93,43 +108,9 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
         return items;
     }
 
-
-
     @Override
     public int getItemCount() {
         return items.size();
     }
 
-    public Filter getFilter() {
-        return exampleFilter;
-    }
-
-    private final Filter exampleFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<Locations> filteredList = new ArrayList<>();
-
-
-            if (constraint != null || constraint.length() != 0) {
-                filteredList.addAll(items2);
-            } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-                for (Locations items : items2) {
-                    if (items.getCategory().contains(filterPattern)) {
-                        filteredList.add(items);
-                    }
-                }
-            }
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-            return results;
-        }
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-
-            items.clear();
-            items.addAll((List) results.values);
-            notifyDataSetChanged();
-        }
-    };
 }

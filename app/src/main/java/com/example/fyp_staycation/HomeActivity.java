@@ -3,6 +3,7 @@ package com.example.fyp_staycation;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,11 +35,13 @@ import com.example.fyp_staycation.adapters.GroupChatAdapter;
 import com.example.fyp_staycation.classes.Connections;
 import com.example.fyp_staycation.classes.Locations;
 import com.example.fyp_staycation.classes.Messages;
+import com.example.fyp_staycation.classes.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -83,10 +87,12 @@ public class HomeActivity extends AppCompatActivity {
     }
     private SearchView searchView;
     String user1;
-    private String Title, locationRandomKey;
+    private String Title, locationRandomKey,lid;
     private ArrayList<Locations> filterLocation;
     private View itemView;
-
+    private FloatingActionButton searchBtn, locDetails;
+    private Toolbar toolbar;
+    private TextView homeTitle;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -99,6 +105,10 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
+            case R.id.tripNearMe:
+                Intent intentMap = new Intent(HomeActivity.this, NearMeActivity.class);
+                startActivity(intentMap);
+                break;
             case R.id.home:
                 Intent intentHome = new Intent(HomeActivity.this, HomeActivity.class);
                 startActivity(intentHome);
@@ -107,15 +117,13 @@ public class HomeActivity extends AppCompatActivity {
                 Intent intentProfile = new Intent(HomeActivity.this, ProfileActivity.class);
                 startActivity(intentProfile);
                 break;
-            case R.id.Filter:
-                showFilterDialog();
-                break;
             case R.id.Trips:
                 Intent intentTrip = new Intent(HomeActivity.this, TripsActivity.class);
                 startActivity(intentTrip);
                 break;
             case R.id.Connections:
                 Intent intentGroup = new Intent(HomeActivity.this, GroupChatActivity.class);
+                intentGroup.putExtra("lid",locations.getLid());
                 startActivity(intentGroup);
                 break;
             case R.id.logout:
@@ -161,7 +169,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void fetchFilterCounty(String query) {
-
+    //#####NEEDS TO BE FIXED######
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -190,17 +198,43 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            Log.d("trip is null", "");
+        } else {
+            lid = extras.getString("lid");
+        }
         locations = new Locations();
+        toolbar = findViewById(R.id.homeToolbar);
+        setSupportActionBar(toolbar);
         filterLocation = new ArrayList<>();
         user = FirebaseAuth.getInstance().getCurrentUser();
         title = findViewById(R.id.item_title);
         city = findViewById(R.id.item_city);
         county = findViewById(R.id.item_county);
+        homeTitle = findViewById(R.id.homeTitle);
+        imageView = findViewById(R.id.profile_image_details);
+        getUserDetails();
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentProfile = new Intent(HomeActivity.this, ProfileActivity.class);
+                startActivity(intentProfile);
+            }
+        });
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Locations");
         dbref = FirebaseAuth.getInstance().getCurrentUser();
         condb = FirebaseDatabase.getInstance().getReference().child("Connections");
         cardStackView = findViewById(R.id.card_stack_view);
+
+        searchBtn = (FloatingActionButton) findViewById(R.id.searchBtn);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFilterDialog();
+            }
+        });
 
         manager = new CardStackLayoutManager(this, new CardStackListener() {
             @Override
@@ -254,10 +288,39 @@ public class HomeActivity extends AppCompatActivity {
         manager.setCanScrollHorizontal(true);
         manager.setSwipeableMethod(SwipeableMethod.Manual);
         manager.setOverlayInterpolator(new LinearInterpolator());
-        adapter1 = new CardStackAdapter(addList());
+        adapter1 = new CardStackAdapter(HomeActivity.this,addList());
         cardStackView.setLayoutManager(manager);
         cardStackView.setAdapter(adapter1);
         cardStackView.setItemAnimator(new DefaultItemAnimator());
+
+    }
+
+    private void getUserDetails() {
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
+        databaseReference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if(user!=null){
+                    String name = user.getUsername();
+                    if(user.getImage()!=null) {
+                        String image = user.getImage();
+                        Log.e("testing123", image);
+                        homeTitle.setText("Hi " + name);
+                        Picasso.get().load(user.getImage()).into(imageView);
+                    }else{
+                        Picasso.get().load(R.drawable.profile_icon_foreground).into(imageView);
+                    }
+                }
+                Log.e("test", "test");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
@@ -348,7 +411,7 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 };
 
-        adapter1 = new CardStackAdapter(addList());
+        adapter1 = new CardStackAdapter(HomeActivity.this,addList());
         cardStackView.setAdapter(adapter);
         adapter.startListening();
     }

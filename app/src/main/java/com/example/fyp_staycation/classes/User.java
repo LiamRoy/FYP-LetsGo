@@ -13,6 +13,15 @@ public class User {
     public User(){
     }
 
+    public User(String username, String email, String password, String description, String phoneNum, String uid){
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.description = description;
+        this.phoneNum = phoneNum;
+        this.uid = uid;
+    }
+
     public User(String username, String email, String password, String description, String phoneNum, String uid, String image) {
         this.username = username;
         this.email = email;

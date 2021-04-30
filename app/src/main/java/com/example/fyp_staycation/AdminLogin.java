@@ -70,6 +70,12 @@ public class AdminLogin extends AppCompatActivity implements View.OnClickListene
             return;
         }
 
+        if (!email.equalsIgnoreCase("admin@gmail.com")){
+            editEmail.setError("Admin Email is required");
+            editEmail.requestFocus();
+            return;
+        }
+
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             editEmail.setError("Please enter Valid Email");
             editEmail.requestFocus();
