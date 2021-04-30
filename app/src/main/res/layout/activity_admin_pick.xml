@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backround_gradient"
     tools:context=".AdminPickActivity">
 
     <ImageView
@@ -18,6 +19,7 @@
 
     <EditText
         android:id="@+id/title"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnadd"
@@ -30,6 +32,7 @@
 
     <EditText
         android:id="@+id/city"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
@@ -41,6 +44,7 @@
 
     <EditText
         android:id="@+id/county"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/city"
@@ -52,6 +56,7 @@
 
     <EditText
         android:id="@+id/Category"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/county"
@@ -64,6 +69,7 @@
 
     <EditText
         android:id="@+id/description"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/link"
@@ -80,6 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/Category"
         android:layout_marginLeft="50dp"
+        android:textColor="@color/white"
         android:layout_marginTop="5dp"
         android:layout_marginRight="50dp"
         android:hint="Link"
@@ -90,6 +97,7 @@
         android:id="@+id/btnadd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:layout_below="@id/select_product_image"
         android:layout_marginLeft="45dp"
         android:layout_marginRight="45dp"
