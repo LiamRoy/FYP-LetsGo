@@ -4,10 +4,10 @@
 
     <item android:id="@+id/showMyTrips"
         android:title="Show My Trips"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
     <item android:id="@+id/logout"
         android:title="Logout"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
 </menu>

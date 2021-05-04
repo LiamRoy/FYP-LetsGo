@@ -53,7 +53,7 @@ public class TripsActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private TextView groupTitle, tripDate, tripCreated, homeTitle;
     FirebaseRecyclerAdapter<Trip, TripAdapter.ViewHolder> adapter;
-    private ImageView imageView;
+    private ImageView imageView,homeImg;
     private LinearLayoutManager manager;
     private ArrayList<Participants> userList;
     Trip trips;
@@ -108,11 +108,17 @@ public class TripsActivity extends AppCompatActivity {
         groupsRv = findViewById(R.id.rvGroup);
         //imageView = findViewById(R.id.star);
 
-        toolbar = findViewById(R.id.homeToolbar);
-        setSupportActionBar(toolbar);
         imageView=(ImageView)findViewById(R.id.profile_image_details);
         user = FirebaseAuth.getInstance().getCurrentUser();
         homeTitle=(TextView)findViewById(R.id.homeTitle);
+        homeImg = findViewById(R.id.homeImg);
+        homeImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TripsActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
 
         getUserDetails();
 
@@ -262,10 +268,10 @@ public class TripsActivity extends AppCompatActivity {
                             Participants participants = new Participants(username);
                             userList.add(participants);
                             for(Participants participants1 : userList) {
-                                Log.e("test", ""+username);
+
                                 if(userList.size()>=2){
                                     Log.e("users are bigger than 2", ""+ userList.size());
-                                    imageView.setVisibility(View.VISIBLE);
+                                    //imageView.setVisibility(View.VISIBLE);
                                 }
                             }
                             //userList.add(list);

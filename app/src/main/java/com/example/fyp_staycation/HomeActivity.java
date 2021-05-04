@@ -69,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private Locations locations;
     private FirebaseUser user;
-    private ImageView imageView;
+    private ImageView imageView, homeImg;
     private static final String TAG = "Home Activity";
     private CardStackLayoutManager manager;
     private DatabaseReference databaseReference;
@@ -90,7 +90,7 @@ public class HomeActivity extends AppCompatActivity {
     private String Title, locationRandomKey,lid;
     private ArrayList<Locations> filterLocation;
     private View itemView;
-    private FloatingActionButton searchBtn, locDetails;
+    private FloatingActionButton searchBtn, catBtn;
     private Toolbar toolbar;
     private TextView homeTitle;
 
@@ -214,6 +214,14 @@ public class HomeActivity extends AppCompatActivity {
         county = findViewById(R.id.item_county);
         homeTitle = findViewById(R.id.homeTitle);
         imageView = findViewById(R.id.profile_image_details);
+        homeImg = (ImageView) findViewById(R.id.homeImg);
+        homeImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentHome = new Intent(HomeActivity.this, HomeActivity.class);
+                startActivity(intentHome);
+            }
+        });
         getUserDetails();
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,6 +235,14 @@ public class HomeActivity extends AppCompatActivity {
         dbref = FirebaseAuth.getInstance().getCurrentUser();
         condb = FirebaseDatabase.getInstance().getReference().child("Connections");
         cardStackView = findViewById(R.id.card_stack_view);
+
+        catBtn = (FloatingActionButton)findViewById(R.id.catBtn);
+        catBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCatFilterDialog();
+            }
+        });
 
         searchBtn = (FloatingActionButton) findViewById(R.id.searchBtn);
         searchBtn.setOnClickListener(new View.OnClickListener() {
@@ -293,6 +309,63 @@ public class HomeActivity extends AppCompatActivity {
         cardStackView.setAdapter(adapter1);
         cardStackView.setItemAnimator(new DefaultItemAnimator());
 
+    }
+
+    private void showCatFilterDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(HomeActivity.this);
+        alertDialog.setTitle("Select a Category");
+        alertDialog.setCancelable(true);
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View filterLayout = inflater.inflate(R.layout.dialog_options, null);
+
+        final AutoCompleteTextView filterText = (AutoCompleteTextView) filterLayout.findViewById(R.id.editCounty);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.dialog_options);
+        filterText.setAdapter(adapter);
+        alertDialog.setView(filterLayout);
+        alertDialog.setNegativeButton("Cancel", (dialog, which) -> {
+            dialog.dismiss();
+        });
+        alertDialog.setPositiveButton("Search", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                List<String> filter_key = new ArrayList<>();
+                StringBuilder filter_query = new StringBuilder("");
+                filter_key.add(filterText.getText().toString());
+                Collections.sort(filter_key);
+                for(String key: filter_key){
+                    filter_query.append(key);
+                }
+
+
+                fetchFilterCategory(filter_query.toString());
+            }
+        });
+        alertDialog.show();
+    }
+
+    private void fetchFilterCategory(String query) {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                items.clear();
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    Locations locations = ds.getValue(Locations.class);
+
+                    if(locations.getCategory().equalsIgnoreCase(query)){
+                        items.add(locations);
+                        Log.e(locations.getCategory(), locations.getTitle());
+                    }
+                }
+                Log.e("test", "test");
+                Log.e("test", String.valueOf(items.size()));
+                adapter1.notifyDataSetChanged();
+                cardStackView.setAdapter(adapter1);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     private void getUserDetails() {

@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,7 +31,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID,profileId;
-    private ImageView profileImage;
+    private ImageView profileImage,homeImg,imageView;
     private static final int GalleryPick = 1;
     private Uri ImageUri;
     private String locationRandomKey, downloadImageUrl;
@@ -53,6 +55,16 @@ public class ViewProfileActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.homeToolbar);
         setSupportActionBar(toolbar);
 
+        imageView=(ImageView) findViewById(R.id.profile_image_details);
+        homeImg = findViewById(R.id.homeImg);
+        homeImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewProfileActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("User");
         userID = user.getUid();
@@ -68,10 +80,36 @@ public class ViewProfileActivity extends AppCompatActivity {
         descTxt=(TextView)findViewById(R.id.profileDescription);
 
         getUserDetails(profileId);
+        getCurrentUser();
+    }
+
+    private void getCurrentUser() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
+        databaseReference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if(user!=null){
+                    String name = user.getUsername();
+                    if(user.getImage()!=null) {
+                        String image = user.getImage();
+                        homeTitle.setText("Hi " + name);
+                        Picasso.get().load(user.getImage()).into(imageView);
+                    }else{
+                        Picasso.get().load(R.drawable.profile_icon_foreground).into(imageView);
+                    }
+                }
+                Log.e("test", "test");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void getUserDetails(String profileId) {
-
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("User");
         reference.child(profileId).addValueEventListener(new ValueEventListener() {

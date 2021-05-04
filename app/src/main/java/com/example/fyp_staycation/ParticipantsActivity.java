@@ -68,7 +68,7 @@ public class ParticipantsActivity extends AppCompatActivity {
     private RecyclerView userRv;
     private ArrayList<Participants> userList;
     private UserAdapter userAdapter;
-    private ImageView imageView;
+    private ImageView imageView, homeImg;
     private SupportMapFragment supportMapFragment;
     private FusedLocationProviderClient client;
     private Button btnPicker;
@@ -155,6 +155,15 @@ public class ParticipantsActivity extends AppCompatActivity {
         dateTrip=(TextView) findViewById(R.id.dateTrip);
         timeTrip = findViewById(R.id.meetTime);
         user = FirebaseAuth.getInstance().getCurrentUser();
+
+        homeImg = findViewById(R.id.homeImg);
+        homeImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ParticipantsActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Trips");
         databaseReference.child(tid).addValueEventListener(new ValueEventListener() {

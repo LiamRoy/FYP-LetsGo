@@ -30,6 +30,7 @@ import com.example.fyp_staycation.classes.Connections;
 import com.example.fyp_staycation.classes.Locations;
 import com.example.fyp_staycation.classes.Messages;
 import com.example.fyp_staycation.classes.Participants;
+import com.example.fyp_staycation.classes.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,7 +59,7 @@ public class GroupChatActivity extends AppCompatActivity {
     private LinearLayoutManager manager;
     private String groupId, location;
     private Context context;
-    private ImageView imageView;
+    private ImageView imageView, homeBtn;
     private Messages messages;
     private Toolbar toolbar;
     private TextView homeTitle;
@@ -126,27 +127,61 @@ public class GroupChatActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.homeToolbar);
         setSupportActionBar(toolbar);
+        imageView = (ImageView) findViewById(R.id.profile_image_details);
+        homeTitle = (TextView) findViewById(R.id.homeTitle);
+        homeBtn = (ImageView) findViewById(R.id.homeImg);
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GroupChatActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        firebaseAuth = FirebaseAuth.getInstance();
+        getUserDetails();
 
         groupChatList = new ArrayList<>();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Connections");
         groupTitle = findViewById(R.id.groupTitle);
         groupsRv = findViewById(R.id.rvGroup);
-        firebaseAuth = FirebaseAuth.getInstance();
-        //imageView = (ImageView) findViewById(R.id.groupImage);
+
+
         groupChatAdapter = new GroupChatAdapter(GroupChatActivity.this, groupChatList);
         groupsRv.setAdapter(groupChatAdapter);
-        //loadConnectionsInfo();
+
         connections = new Connections();
         messages = new Messages();
         loadGroupChatList();
-        //loadLastMessage(messages, holder);
 
-//        addList();
-//        groupsRv.setHasFixedSize(true);
-//        groupsRv.setLayoutManager(new LinearLayoutManager(this));
-//        groupsRv.setAdapter(groupChatAdapter);
-//        ;
-        //groupsRv.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void getUserDetails() {
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
+        databaseReference.child(firebaseAuth.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if(user!=null){
+                    String name = user.getUsername();
+                    if(user.getImage()!=null) {
+                        String image = user.getImage();
+                        Log.e("testing123", image);
+                        homeTitle.setText("Hi " + name);
+                        Picasso.get().load(user.getImage()).into(imageView);
+                    }else{
+                        Picasso.get().load(R.drawable.profile_icon_foreground).into(imageView);
+                    }
+                }
+                Log.e("test", "test");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     private void loadConnectionsInfo() {

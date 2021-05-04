@@ -90,14 +90,14 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder> {
         holder.tripTime.setText(trip.getMeettime());
         holder.tripId.setText(trip.getTid());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, MyParticipantsActivity.class);
-                intent.putExtra("tripId",trip.getTid());
-                startActivity(context, intent, null);
-            }
-        });
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(context, MyParticipantsActivity.class);
+//                intent.putExtra("tripId",trip.getTid());
+//                startActivity(context, intent, null);
+//            }
+//        });
     }
 
 

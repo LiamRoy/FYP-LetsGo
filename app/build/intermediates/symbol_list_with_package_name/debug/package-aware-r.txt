@@ -1781,7 +1781,10 @@ drawable ic_add_trip_24
 drawable ic_baseline_add_a_photo_24
 drawable ic_cancel
 drawable ic_clock_black_24dp
+drawable ic_email
+drawable ic_filter
 drawable ic_heart
+drawable ic_home
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -1795,6 +1798,7 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_person_white_24dp
+drawable ic_phone
 drawable ic_search_background
 drawable ic_search_foreground
 drawable letsgo
@@ -1949,6 +1953,7 @@ id cache_measures
 id cancel_action
 id cancel_button
 id card_stack_view
+id catBtn
 id center
 id center_horizontal
 id center_vertical
@@ -2060,6 +2065,7 @@ id header_title
 id hideable
 id home
 id homeAsUp
+id homeImg
 id homeTitle
 id homeToolbar
 id honorRequest

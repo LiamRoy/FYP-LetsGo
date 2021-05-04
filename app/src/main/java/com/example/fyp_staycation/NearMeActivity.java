@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fyp_staycation.adapters.UserAdapter;
@@ -23,6 +25,7 @@ import com.example.fyp_staycation.classes.Connections;
 import com.example.fyp_staycation.classes.Locations;
 import com.example.fyp_staycation.classes.Participants;
 import com.example.fyp_staycation.classes.Trip;
+import com.example.fyp_staycation.classes.User;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,11 +38,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -63,6 +68,8 @@ public class NearMeActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Locations locations;
     private TextView homeTitle;
+    private ImageView homeImg, imageView;
+    private FirebaseUser user;
 
     public NearMeActivity(){
 
@@ -129,10 +136,20 @@ public class NearMeActivity extends AppCompatActivity {
         }
         trip = new Trip();
         geocoder = new Geocoder(this);
-
-        Log.e("trip id test", ""+tripId);
+        user = FirebaseAuth.getInstance().getCurrentUser();
         toolbar = findViewById(R.id.chatToolbar);
         setSupportActionBar(toolbar);
+        homeImg = findViewById(R.id.homeImg);
+        homeImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NearMeActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        imageView = findViewById(R.id.profile_image_details);
+        homeTitle = findViewById(R.id.homeTitle);
+
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.nearMeMap);
         client = LocationServices.getFusedLocationProviderClient(this);
         mapPoints = new ArrayList<Trip>();
@@ -144,6 +161,37 @@ public class NearMeActivity extends AppCompatActivity {
         else{
             ActivityCompat.requestPermissions(NearMeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44 );
         }
+
+        getUserDetails();
+
+    }
+
+    private void getUserDetails() {
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
+        databaseReference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if(user!=null){
+                    String name = user.getUsername();
+                    if(user.getImage()!=null) {
+                        String image = user.getImage();
+                        Log.e("testing123", image);
+                        homeTitle.setText("Hi " + name);
+                        Picasso.get().load(user.getImage()).into(imageView);
+                    }else{
+                        Picasso.get().load(R.drawable.profile_icon_foreground).into(imageView);
+                    }
+                }
+                Log.e("test", "test");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
@@ -177,7 +225,6 @@ public class NearMeActivity extends AppCompatActivity {
                             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
                             //googleMap.addMarker(options);
 
-
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Trips");
                             databaseReference.addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -185,7 +232,6 @@ public class NearMeActivity extends AppCompatActivity {
                                     Log.e("Value", "Test");
                                     for(DataSnapshot ds: snapshot.getChildren()) {
                                         Trip trip = ds.getValue(Trip.class);
-                                        Log.e("title Test", ""+trip.getTripTitle());
                                         mapPoints.add(trip);
                                         try {
                                             List<Address> addressList = geocoder.getFromLocation(trip.getLat(), trip.getLng(), 1);
@@ -261,6 +307,4 @@ public class NearMeActivity extends AppCompatActivity {
             }
         }
     }
-
-
 }

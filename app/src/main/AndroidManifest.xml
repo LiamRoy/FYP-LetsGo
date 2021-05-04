@@ -13,7 +13,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/letsgo"
-        android:label=""
+        android:label="LetsGo"
         android:roundIcon="@drawable/letsgo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FYPStayCation">
@@ -40,8 +40,7 @@
         <activity
             android:name=".ParticipantsActivity"
             android:theme="@style/Theme.FYPStayCation.NoActionBar" />
-        <activity android:name=".TripsActivity"
-            android:theme="@style/Theme.FYPStayCation.NoActionBar"/>
+        <activity android:name=".TripsActivity"/>
         <activity
             android:name=".CreateTripActivity"
             android:theme="@style/Theme.FYPStayCation.NoActionBar" />

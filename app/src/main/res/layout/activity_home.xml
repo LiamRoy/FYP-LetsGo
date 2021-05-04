@@ -17,13 +17,28 @@
         android:clipToPadding="false" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/catBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="25dp"
+        android:backgroundTint="@color/profileBackground"
+        android:foregroundGravity="bottom"
+        android:padding="10dp"
+        android:src="@drawable/ic_filter" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/searchBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_gravity="end|bottom"
-        android:layout_marginTop="700dp"
+        android:layout_marginTop="750dp"
         android:layout_marginEnd="21dp"
         android:layout_marginRight="25dp"
         android:backgroundTint="@color/profileBackground"

@@ -12,7 +12,6 @@
         android:layout_width="411dp"
         android:layout_height="69dp">
 
-
         <TextView
             android:id="@+id/groupTitle"
             android:layout_width="match_parent"

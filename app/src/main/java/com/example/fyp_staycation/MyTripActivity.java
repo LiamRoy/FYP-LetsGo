@@ -7,23 +7,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fyp_staycation.adapters.GroupChatAdapter;
 import com.example.fyp_staycation.adapters.TripAdapter;
 import com.example.fyp_staycation.classes.Connections;
 import com.example.fyp_staycation.classes.Trip;
+import com.example.fyp_staycation.classes.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +40,12 @@ public class MyTripActivity extends AppCompatActivity {
     private ArrayList<Trip> tripArrayList;
     private TripAdapter tripAdapter;
     private DatabaseReference databaseReference;
-    private TextView groupTitle, tripDate, tripCreated;
+    private TextView groupTitle, tripDate, tripCreated,homeTitle;
     FirebaseRecyclerAdapter<Trip, TripAdapter.ViewHolder> adapter;
     private LinearLayoutManager manager;
     private Trip trips;
+    private ImageView imageView,homeImg;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,20 @@ public class MyTripActivity extends AppCompatActivity {
         groupTitle = findViewById(R.id.groupTitle);
         groupsRv = findViewById(R.id.rvGroup);
 
+        imageView=(ImageView)findViewById(R.id.profile_image_details);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        homeTitle=(TextView)findViewById(R.id.homeTitle);
+        homeImg = findViewById(R.id.homeImg);
+        homeImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyTripActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        getUserDetails();
+
         trips = new Trip();
         tripArrayList = new ArrayList<Trip>();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -56,6 +77,33 @@ public class MyTripActivity extends AppCompatActivity {
         groupsRv.setAdapter(tripAdapter);
         loadMyTrips();
         //groupsRv.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void getUserDetails() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
+        databaseReference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if(user!=null){
+                    String name = user.getUsername();
+                    if(user.getImage()!=null) {
+                        String image = user.getImage();
+                        Log.e("testing123", image);
+                        homeTitle.setText("Hi " + name);
+                        Picasso.get().load(user.getImage()).into(imageView);
+                    }else{
+                        Picasso.get().load(R.drawable.profile_icon_foreground).into(imageView);
+                    }
+                }
+                Log.e("test", "test");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     /*@Override

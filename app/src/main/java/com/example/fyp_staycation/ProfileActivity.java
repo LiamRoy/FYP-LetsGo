@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -43,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
-    private ImageView InputProductImage,profileImage;
+    private ImageView InputProductImage,profileImage, homeBtn;
     private static final int GalleryPick = 1;
     private Uri ImageUri;
     private String locationRandomKey, downloadImageUrl;
@@ -114,6 +115,14 @@ public class ProfileActivity extends AppCompatActivity {
         final TextView emailtext = (TextView) findViewById(R.id.profileEmail);
         final TextView descriptionText = (TextView) findViewById(R.id.profileDescription);
         final TextView phonetext = (TextView) findViewById(R.id.profileNumber);
+        homeBtn = (ImageView) findViewById(R.id.homeImg);
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         profileImage.setOnClickListener(new View.OnClickListener() {
@@ -178,8 +187,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void storeInformation() {
 
-        loadingBar.setTitle("Add New Location");
-        loadingBar.setMessage("Dear Admin, please wait while we are adding the new Location.");
+        loadingBar.setTitle("Add New Profile Image");
+        loadingBar.setMessage("Dear User, please wait while we are adding the new Image to your Account.");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
 
@@ -201,7 +210,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
             {
-                Toast.makeText(ProfileActivity.this, "Location Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this, "Profile Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
 
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
@@ -223,7 +232,7 @@ public class ProfileActivity extends AppCompatActivity {
                         {
                             downloadImageUrl = task.getResult().toString();
 
-                            Toast.makeText(ProfileActivity.this, "got the Location image Url Successfully...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProfileActivity.this, "got the profile image Url Successfully...", Toast.LENGTH_SHORT).show();
 
                             SaveProductInfoToDatabase();
                         }
@@ -246,7 +255,7 @@ public class ProfileActivity extends AppCompatActivity {
                 if (task.isSuccessful())
                 {
                     loadingBar.dismiss();
-                    Toast.makeText(ProfileActivity.this, "Location is added successfully..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileActivity.this, "Profile Image is added successfully..", Toast.LENGTH_SHORT).show();
 
                 }
                 else

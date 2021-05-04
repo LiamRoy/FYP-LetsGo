@@ -32,8 +32,16 @@
             android:layout_toEndOf="@id/name"
             android:layout_toRightOf="@id/name"
             android:gravity="center"
-            android:text="Group Title"
+            android:text="Add Profile Image"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
+    <ImageView
+        android:id="@+id/homeImg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_home"
+        android:layout_toRightOf="@id/homeTitle"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp" />
     </androidx.appcompat.widget.Toolbar>

@@ -63,7 +63,7 @@ public class LocationDetailsActivity extends AppCompatActivity {
     private Uri ImageUri;
     private StorageReference LocationImagesRef;
     private FloatingActionButton addToTrip, cancelBtn;
-    private ImageView imageView,linkImage;
+    private ImageView imageView,linkImage, profileImage, homeBtn;
     private DatePickerDialog picker;
     private EditText date;
     private TextView title,city,county,description;
@@ -198,6 +198,26 @@ public class LocationDetailsActivity extends AppCompatActivity {
         description = (TextView) findViewById(R.id.location_description);
 
         getLocationDetails(location);
+        homeTitle = findViewById(R.id.homeTitle);
+        profileImage = findViewById(R.id.profile_image_details);
+        getUserDetails();
+
+        homeBtn = (ImageView) findViewById(R.id.homeImg);
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LocationDetailsActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentProfile = new Intent(LocationDetailsActivity.this, ProfileActivity.class);
+                startActivity(intentProfile);
+            }
+        });
         linkImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -229,6 +249,34 @@ public class LocationDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void getUserDetails() {
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
+        databaseReference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if(user!=null){
+                    String name = user.getUsername();
+                    if(user.getImage()!=null) {
+                        String image = user.getImage();
+                        homeTitle.setText("Hi " + name);
+                        Picasso.get().load(user.getImage()).into(profileImage);
+                    }else{
+                        Picasso.get().load(R.drawable.profile_icon_foreground).into(profileImage);
+                    }
+                }
+                Log.e("test", "test");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     private void addingToTrip() {
@@ -264,7 +312,8 @@ public class LocationDetailsActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
 
-                                        Toast.makeText(LocationDetailsActivity.this, "Groups Created", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LocationDetailsActivity.this, "Connection Created", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LocationDetailsActivity.this, "You are now connected to this Location", Toast.LENGTH_LONG).show();
                                         finish();
                                     }
                                 });
@@ -284,7 +333,6 @@ public class LocationDetailsActivity extends AppCompatActivity {
                     Locations locations = snapshot.getValue(Locations.class);
                     if(locations != null){
                         link = String.valueOf(snapshot.child("link").getValue());
-                        Log.e("Link test", "" +  link);
                         title.setText(locations.getTitle());
                         city.setText(locations.getCity());
                         county.setText(locations.getCounty());
@@ -296,10 +344,8 @@ public class LocationDetailsActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }

@@ -30,7 +30,7 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@drawable/letsgo"
-        android:label=""
+        android:label="LetsGo"
         android:roundIcon="@drawable/letsgo"
         android:supportsRtl="true"
         android:testOnly="true"
@@ -58,9 +58,7 @@
         <activity
             android:name="com.example.fyp_staycation.ParticipantsActivity"
             android:theme="@style/Theme.FYPStayCation.NoActionBar" />
-        <activity
-            android:name="com.example.fyp_staycation.TripsActivity"
-            android:theme="@style/Theme.FYPStayCation.NoActionBar" />
+        <activity android:name="com.example.fyp_staycation.TripsActivity" />
         <activity
             android:name="com.example.fyp_staycation.CreateTripActivity"
             android:theme="@style/Theme.FYPStayCation.NoActionBar" />

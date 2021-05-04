@@ -112,12 +112,25 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         }
 
         if(phoneNum1.isEmpty()){
-            phoneNum.setError("Age is Required");
+            phoneNum.setError("Phone is Required");
             phoneNum.requestFocus();
             return;
         }
+
+        if(!phoneNum1.startsWith("08")){
+            phoneNum.setError("Phone number must be valid - start with 08");
+            phoneNum.requestFocus();
+            return;
+        }
+
+        if(!(phoneNum1.length() >=10)){
+            phoneNum.setError("Phone must be 10 digits");
+            phoneNum.requestFocus();
+            return;
+        }
+
         if(description1.isEmpty()){
-            description.setError("Address is Required");
+            description.setError("Description of any form is Required");
             description.requestFocus();
             return;
         }

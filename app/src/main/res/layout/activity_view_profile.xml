@@ -28,20 +28,21 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
-        android:id="@+id/profileUsername"
-        android:layout_width="250dp"
-        android:layout_height="35dp"
-        android:layout_below="@id/profileImage"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
-        android:gravity="center"
-        android:text="Title"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:id="@+id/profileUsername"
+    android:layout_width="250dp"
+    android:layout_height="35dp"
+    android:layout_below="@id/profileImage"
+    android:drawableLeft="@drawable/ic_person_white_24dp"
+    android:layout_marginTop="128dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginRight="12dp"
+    android:gravity="center"
+    android:text="Title"
+    android:textColor="@color/white"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/profileEmail"
@@ -52,7 +53,8 @@
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
         android:gravity="center"
-        android:text="City"
+        android:text="email"
+        android:drawableLeft="@drawable/ic_email"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -70,6 +72,7 @@
         android:gravity="center"
         android:text="County"
         android:textColor="@color/white"
+        android:drawableLeft="@drawable/ic_phone"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

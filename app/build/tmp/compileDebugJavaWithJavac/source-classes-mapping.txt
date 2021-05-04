@@ -10,62 +10,49 @@ com/example/fyp_staycation/AdminPickActivity.java
  com.example.fyp_staycation.AdminPickActivity$4$2
  com.example.fyp_staycation.AdminPickActivity$5
  com.example.fyp_staycation.AdminPickActivity$6
-com/example/fyp_staycation/GroupChatFragment.java
- com.example.fyp_staycation.GroupChatFragment
- com.example.fyp_staycation.GroupChatFragment$1
 com/example/fyp_staycation/classes/Trip.java
  com.example.fyp_staycation.classes.Trip
 com/example/fyp_staycation/classes/Locations.java
  com.example.fyp_staycation.classes.Locations
-com/example/fyp_staycation/HomeActivity.java
- com.example.fyp_staycation.HomeActivity
- com.example.fyp_staycation.HomeActivity$1
- com.example.fyp_staycation.HomeActivity$2
- com.example.fyp_staycation.HomeActivity$3
- com.example.fyp_staycation.HomeActivity$4
- com.example.fyp_staycation.HomeActivity$5
- com.example.fyp_staycation.HomeActivity$6
- com.example.fyp_staycation.HomeActivity$7
- com.example.fyp_staycation.HomeActivity$7$1
- com.example.fyp_staycation.HomeActivity$8
- com.example.fyp_staycation.HomeActivity$8$1
+com/example/fyp_staycation/AdminLogin.java
+ com.example.fyp_staycation.AdminLogin
+ com.example.fyp_staycation.AdminLogin$1
 com/example/fyp_staycation/classes/UserTrip.java
  com.example.fyp_staycation.classes.UserTrip
-com/example/fyp_staycation/MyTripActivity.java
- com.example.fyp_staycation.MyTripActivity
- com.example.fyp_staycation.MyTripActivity$1
-com/example/fyp_staycation/CreateTripActivity.java
- com.example.fyp_staycation.CreateTripActivity
- com.example.fyp_staycation.CreateTripActivity$1
- com.example.fyp_staycation.CreateTripActivity$2
- com.example.fyp_staycation.CreateTripActivity$3
- com.example.fyp_staycation.CreateTripActivity$3$1
- com.example.fyp_staycation.CreateTripActivity$4
- com.example.fyp_staycation.CreateTripActivity$4$1
- com.example.fyp_staycation.CreateTripActivity$5
- com.example.fyp_staycation.CreateTripActivity$6
- com.example.fyp_staycation.CreateTripActivity$6$1
- com.example.fyp_staycation.CreateTripActivity$6$1$1
- com.example.fyp_staycation.CreateTripActivity$7
- com.example.fyp_staycation.CreateTripActivity$7$1
+com/example/fyp_staycation/classes/User.java
+ com.example.fyp_staycation.classes.User
+com/example/fyp_staycation/MainActivity.java
+ com.example.fyp_staycation.MainActivity
+ com.example.fyp_staycation.MainActivity$1
 com/example/fyp_staycation/CardStackCallBack.java
  com.example.fyp_staycation.CardStackCallback
-com/example/fyp_staycation/classes/Participants.java
- com.example.fyp_staycation.classes.Participants
-com/example/fyp_staycation/RegisterUser.java
- com.example.fyp_staycation.RegisterUser
- com.example.fyp_staycation.RegisterUser$1
- com.example.fyp_staycation.RegisterUser$1$1
-com/example/fyp_staycation/adapters/UserAdapter.java
- com.example.fyp_staycation.adapters.UserAdapter
- com.example.fyp_staycation.adapters.UserAdapter$1
- com.example.fyp_staycation.adapters.UserAdapter$HolderUser
 com/example/fyp_staycation/CardStackAdapter.java
  com.example.fyp_staycation.CardStackAdapter
  com.example.fyp_staycation.CardStackAdapter$1
  com.example.fyp_staycation.CardStackAdapter$ViewHolder
-com/example/fyp_staycation/AdminActivity.java
- com.example.fyp_staycation.AdminActivity
+com/example/fyp_staycation/RegisterUser.java
+ com.example.fyp_staycation.RegisterUser
+ com.example.fyp_staycation.RegisterUser$1
+ com.example.fyp_staycation.RegisterUser$1$1
+com/example/fyp_staycation/ParticipantsActivity.java
+ com.example.fyp_staycation.ParticipantsActivity
+ com.example.fyp_staycation.ParticipantsActivity$1
+ com.example.fyp_staycation.ParticipantsActivity$2
+ com.example.fyp_staycation.ParticipantsActivity$3
+ com.example.fyp_staycation.ParticipantsActivity$4
+ com.example.fyp_staycation.ParticipantsActivity$5
+ com.example.fyp_staycation.ParticipantsActivity$5$1
+ com.example.fyp_staycation.ParticipantsActivity$6
+ com.example.fyp_staycation.ParticipantsActivity$7
+ com.example.fyp_staycation.ParticipantsActivity$8
+ com.example.fyp_staycation.ParticipantsActivity$9
+com/example/fyp_staycation/ViewProfileActivity.java
+ com.example.fyp_staycation.ViewProfileActivity
+ com.example.fyp_staycation.ViewProfileActivity$1
+ com.example.fyp_staycation.ViewProfileActivity$2
+ com.example.fyp_staycation.ViewProfileActivity$3
+com/example/fyp_staycation/classes/Participants.java
+ com.example.fyp_staycation.classes.Participants
 com/example/fyp_staycation/adapters/GroupChatAdapter.java
  com.example.fyp_staycation.adapters.GroupChatAdapter
  com.example.fyp_staycation.adapters.GroupChatAdapter$1
@@ -80,16 +67,43 @@ com/example/fyp_staycation/adapters/ChatAdapter.java
  com.example.fyp_staycation.adapters.ChatAdapter$1
  com.example.fyp_staycation.adapters.ChatAdapter$2
  com.example.fyp_staycation.adapters.ChatAdapter$HolderChat
-com/example/fyp_staycation/classes/Connections.java
- com.example.fyp_staycation.classes.Connections
+com/example/fyp_staycation/adapters/UserAdapter.java
+ com.example.fyp_staycation.adapters.UserAdapter
+ com.example.fyp_staycation.adapters.UserAdapter$1
+ com.example.fyp_staycation.adapters.UserAdapter$HolderUser
 com/example/fyp_staycation/classes/Messages.java
  com.example.fyp_staycation.classes.Messages
-com/example/fyp_staycation/adapters/TripAdapter.java
- com.example.fyp_staycation.adapters.TripAdapter
- com.example.fyp_staycation.adapters.TripAdapter$1
- com.example.fyp_staycation.adapters.TripAdapter$ViewHolder
-com/example/fyp_staycation/classes/User.java
- com.example.fyp_staycation.classes.User
+com/example/fyp_staycation/AdminActivity.java
+ com.example.fyp_staycation.AdminActivity
+com/example/fyp_staycation/classes/Connections.java
+ com.example.fyp_staycation.classes.Connections
+com/example/fyp_staycation/LocationDetailsActivity.java
+ com.example.fyp_staycation.LocationDetailsActivity
+ com.example.fyp_staycation.LocationDetailsActivity$1
+ com.example.fyp_staycation.LocationDetailsActivity$10
+ com.example.fyp_staycation.LocationDetailsActivity$10$1
+ com.example.fyp_staycation.LocationDetailsActivity$2
+ com.example.fyp_staycation.LocationDetailsActivity$3
+ com.example.fyp_staycation.LocationDetailsActivity$4
+ com.example.fyp_staycation.LocationDetailsActivity$5
+ com.example.fyp_staycation.LocationDetailsActivity$6
+ com.example.fyp_staycation.LocationDetailsActivity$7
+ com.example.fyp_staycation.LocationDetailsActivity$8
+ com.example.fyp_staycation.LocationDetailsActivity$8$1
+ com.example.fyp_staycation.LocationDetailsActivity$9
+com/example/fyp_staycation/ItemClickListener.java
+ com.example.fyp_staycation.ItemClickListener
+com/example/fyp_staycation/classes/County.java
+ com.example.fyp_staycation.classes.County
+com/example/fyp_staycation/NearMeActivity.java
+ com.example.fyp_staycation.NearMeActivity
+ com.example.fyp_staycation.NearMeActivity$1
+ com.example.fyp_staycation.NearMeActivity$2
+ com.example.fyp_staycation.NearMeActivity$3
+ com.example.fyp_staycation.NearMeActivity$3$1
+ com.example.fyp_staycation.NearMeActivity$3$1$1
+ com.example.fyp_staycation.NearMeActivity$3$1$1$1
+ com.example.fyp_staycation.NearMeActivity$3$1$2
 com/example/fyp_staycation/ChatActivity.java
  com.example.fyp_staycation.ChatActivity
  com.example.fyp_staycation.ChatActivity$1
@@ -99,24 +113,22 @@ com/example/fyp_staycation/ChatActivity.java
  com.example.fyp_staycation.ChatActivity$5
  com.example.fyp_staycation.ChatActivity$6
  com.example.fyp_staycation.ChatActivity$7
-com/example/fyp_staycation/ItemClickListener.java
- com.example.fyp_staycation.ItemClickListener
-com/example/fyp_staycation/classes/County.java
- com.example.fyp_staycation.classes.County
-com/example/fyp_staycation/ViewProfileActivity.java
- com.example.fyp_staycation.ViewProfileActivity
- com.example.fyp_staycation.ViewProfileActivity$1
-com/example/fyp_staycation/ParticipantsActivity.java
- com.example.fyp_staycation.ParticipantsActivity
- com.example.fyp_staycation.ParticipantsActivity$1
- com.example.fyp_staycation.ParticipantsActivity$2
- com.example.fyp_staycation.ParticipantsActivity$3
- com.example.fyp_staycation.ParticipantsActivity$4
- com.example.fyp_staycation.ParticipantsActivity$4$1
- com.example.fyp_staycation.ParticipantsActivity$5
- com.example.fyp_staycation.ParticipantsActivity$6
- com.example.fyp_staycation.ParticipantsActivity$7
- com.example.fyp_staycation.ParticipantsActivity$8
+com/example/fyp_staycation/HomeActivity.java
+ com.example.fyp_staycation.HomeActivity
+ com.example.fyp_staycation.HomeActivity$1
+ com.example.fyp_staycation.HomeActivity$10
+ com.example.fyp_staycation.HomeActivity$11
+ com.example.fyp_staycation.HomeActivity$11$1
+ com.example.fyp_staycation.HomeActivity$12
+ com.example.fyp_staycation.HomeActivity$12$1
+ com.example.fyp_staycation.HomeActivity$2
+ com.example.fyp_staycation.HomeActivity$3
+ com.example.fyp_staycation.HomeActivity$4
+ com.example.fyp_staycation.HomeActivity$5
+ com.example.fyp_staycation.HomeActivity$6
+ com.example.fyp_staycation.HomeActivity$7
+ com.example.fyp_staycation.HomeActivity$8
+ com.example.fyp_staycation.HomeActivity$9
 com/example/fyp_staycation/MyParticipantsActivity.java
  com.example.fyp_staycation.MyParticipantsActivity
  com.example.fyp_staycation.MyParticipantsActivity$1
@@ -130,44 +142,48 @@ com/example/fyp_staycation/ProfileActivity.java
  com.example.fyp_staycation.ProfileActivity$1
  com.example.fyp_staycation.ProfileActivity$2
  com.example.fyp_staycation.ProfileActivity$3
- com.example.fyp_staycation.ProfileActivity$3$1
- com.example.fyp_staycation.ProfileActivity$3$2
  com.example.fyp_staycation.ProfileActivity$4
+ com.example.fyp_staycation.ProfileActivity$4$1
+ com.example.fyp_staycation.ProfileActivity$4$2
  com.example.fyp_staycation.ProfileActivity$5
+ com.example.fyp_staycation.ProfileActivity$6
 com/example/fyp_staycation/GroupChatActivity.java
  com.example.fyp_staycation.GroupChatActivity
  com.example.fyp_staycation.GroupChatActivity$1
  com.example.fyp_staycation.GroupChatActivity$2
- com.example.fyp_staycation.GroupChatActivity$2$1
  com.example.fyp_staycation.GroupChatActivity$3
-com/example/fyp_staycation/NearMeActivity.java
- com.example.fyp_staycation.NearMeActivity
- com.example.fyp_staycation.NearMeActivity$1
- com.example.fyp_staycation.NearMeActivity$1$1
- com.example.fyp_staycation.NearMeActivity$1$1$1
- com.example.fyp_staycation.NearMeActivity$1$1$1$1
- com.example.fyp_staycation.NearMeActivity$1$1$2
+ com.example.fyp_staycation.GroupChatActivity$4
+ com.example.fyp_staycation.GroupChatActivity$4$1
+ com.example.fyp_staycation.GroupChatActivity$5
+com/example/fyp_staycation/CreateTripActivity.java
+ com.example.fyp_staycation.CreateTripActivity
+ com.example.fyp_staycation.CreateTripActivity$1
+ com.example.fyp_staycation.CreateTripActivity$2
+ com.example.fyp_staycation.CreateTripActivity$3
+ com.example.fyp_staycation.CreateTripActivity$4
+ com.example.fyp_staycation.CreateTripActivity$4$1
+ com.example.fyp_staycation.CreateTripActivity$5
+ com.example.fyp_staycation.CreateTripActivity$5$1
+ com.example.fyp_staycation.CreateTripActivity$6
+ com.example.fyp_staycation.CreateTripActivity$7
+ com.example.fyp_staycation.CreateTripActivity$8
+ com.example.fyp_staycation.CreateTripActivity$8$1
+ com.example.fyp_staycation.CreateTripActivity$8$1$1
+ com.example.fyp_staycation.CreateTripActivity$9
+ com.example.fyp_staycation.CreateTripActivity$9$1
+com/example/fyp_staycation/MyTripActivity.java
+ com.example.fyp_staycation.MyTripActivity
+ com.example.fyp_staycation.MyTripActivity$1
+ com.example.fyp_staycation.MyTripActivity$2
+ com.example.fyp_staycation.MyTripActivity$3
 com/example/fyp_staycation/TripsActivity.java
  com.example.fyp_staycation.TripsActivity
  com.example.fyp_staycation.TripsActivity$1
  com.example.fyp_staycation.TripsActivity$2
  com.example.fyp_staycation.TripsActivity$3
- com.example.fyp_staycation.TripsActivity$3$1
  com.example.fyp_staycation.TripsActivity$4
-com/example/fyp_staycation/LocationDetailsActivity.java
- com.example.fyp_staycation.LocationDetailsActivity
- com.example.fyp_staycation.LocationDetailsActivity$1
- com.example.fyp_staycation.LocationDetailsActivity$2
- com.example.fyp_staycation.LocationDetailsActivity$3
- com.example.fyp_staycation.LocationDetailsActivity$4
- com.example.fyp_staycation.LocationDetailsActivity$5
- com.example.fyp_staycation.LocationDetailsActivity$5$1
- com.example.fyp_staycation.LocationDetailsActivity$6
- com.example.fyp_staycation.LocationDetailsActivity$7
- com.example.fyp_staycation.LocationDetailsActivity$7$1
-com/example/fyp_staycation/AdminLogin.java
- com.example.fyp_staycation.AdminLogin
- com.example.fyp_staycation.AdminLogin$1
-com/example/fyp_staycation/MainActivity.java
- com.example.fyp_staycation.MainActivity
- com.example.fyp_staycation.MainActivity$1
+ com.example.fyp_staycation.TripsActivity$4$1
+ com.example.fyp_staycation.TripsActivity$5
+com/example/fyp_staycation/adapters/TripAdapter.java
+ com.example.fyp_staycation.adapters.TripAdapter
+ com.example.fyp_staycation.adapters.TripAdapter$ViewHolder

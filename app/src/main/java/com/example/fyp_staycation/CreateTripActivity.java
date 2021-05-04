@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -87,6 +89,7 @@ public class CreateTripActivity extends AppCompatActivity {
     private String image;
     private Toolbar toolbar;
     private TextView homeTitle;
+    private ImageView imageView,homeImg;
     private Locations locations;
 
     private GoogleMap.OnMapClickListener mapClickListener;
@@ -190,6 +193,18 @@ public class CreateTripActivity extends AppCompatActivity {
         county = (TextView) findViewById(R.id.tripCounty);
         //getLocationDetails(location);
 
+        imageView = (ImageView) findViewById(R.id.profile_image_details);
+        homeTitle = (TextView) findViewById(R.id.homeTitle);
+        homeImg = (ImageView) findViewById(R.id.homeImg);
+        homeImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentHome = new Intent(CreateTripActivity.this, HomeActivity.class);
+                startActivity(intentHome);
+            }
+        });
+        getUserDetails();
+
 
         userDB.child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -273,6 +288,35 @@ public class CreateTripActivity extends AppCompatActivity {
                 createTrip();
             }
         });
+    }
+
+    private void getUserDetails() {
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
+        databaseReference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if(user!=null){
+                    String name = user.getUsername();
+                    if(user.getImage()!=null) {
+                        String image = user.getImage();
+                        Log.e("testing123", image);
+                        homeTitle.setText("Hi " + name);
+                        Picasso.get().load(user.getImage()).into(imageView);
+                    }else{
+                        Picasso.get().load(R.drawable.profile_icon_foreground).into(imageView);
+                    }
+                }
+                Log.e("test", "test");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     private void getCurrentLocation() {
@@ -402,7 +446,6 @@ public class CreateTripActivity extends AppCompatActivity {
 
                         HashMap<String, Object> members = new HashMap<>();
 
-                        Toast.makeText(CreateTripActivity.this, "test " + newUsername, Toast.LENGTH_SHORT).show();
                         //members.put("Username", newUsername);
                         members.put("userEmail", user.getEmail());
                         members.put("uid", user.getUid());
@@ -427,6 +470,7 @@ public class CreateTripActivity extends AppCompatActivity {
                                         Intent intent = new Intent(CreateTripActivity.this, HomeActivity.class);
                                         startActivity(intent);
                                         Toast.makeText(CreateTripActivity.this, "Trip Created", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(CreateTripActivity.this, "Trip is now in Trip Screen", Toast.LENGTH_SHORT).show();
                                         finish();
                                     }
                                 });

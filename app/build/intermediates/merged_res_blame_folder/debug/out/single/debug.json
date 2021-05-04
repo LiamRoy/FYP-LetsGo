@@ -108,12 +108,20 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_add_pic.png"
     },
     {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_filter.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_filter.png"
+    },
+    {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_cancel.xml.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_cancel.xml"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_chat_box_foreground.png.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\chat_box_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_email.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_email.png"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_launcher_background.png.flat",
@@ -130,6 +138,10 @@
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_profile.xml.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\layout\\activity_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_email.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_email.png"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_add_trip_24.png.flat",
@@ -168,16 +180,16 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\layout\\activity_create_trip.xml"
     },
     {
-        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_search_round.png.flat",
-        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_search_round.png"
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_heart.xml.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-anydpi-v26\\heart.xml"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_heart.xml.flat",
-        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-anydpi-v26\\heart.xml"
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_search_round.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_search_round.png"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_sendbtn_foreground.png.flat",
@@ -204,6 +216,10 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_filter.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_filter.png"
+    },
+    {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_admin.xml.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\layout\\activity_admin.xml"
     },
@@ -214,6 +230,10 @@
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_search_round.png.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-mdpi\\ic_search_round.png"
+    },
+    {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_phone.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_phone.png"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_profile_icon.png.flat",
@@ -238,6 +258,10 @@
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_person_white_24dp.png.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_person_white_24dp.png"
+    },
+    {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_email.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_email.png"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_search_foreground.png.flat",
@@ -276,6 +300,10 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-xxxhdpi\\group_icon_round.png"
     },
     {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_home.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_home.png"
+    },
+    {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_cancel.png.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_cancel.png"
     },
@@ -292,12 +320,20 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-anydpi-v26\\profile_icon_round.xml"
     },
     {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_email.xml.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_email.xml"
+    },
+    {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_sendbtn_foreground.png.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\sendbtn_foreground.png"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_profile_icon.png.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-mdpi\\profile_icon.png"
+    },
+    {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_phone.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_phone.png"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_add_trip_24.png.flat",
@@ -364,6 +400,10 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_phone.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_phone.png"
+    },
+    {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_profile_icon_foreground.png.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\profile_icon_foreground.png"
     },
@@ -376,8 +416,16 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-xxxhdpi\\profile_icon_round.png"
     },
     {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_home.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_home.png"
+    },
+    {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_filter.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_filter.png"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_search_background.png.flat",
@@ -424,6 +472,10 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_add_trip_24.png"
     },
     {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_home.xml.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_home.xml"
+    },
+    {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_search_round.png.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-hdpi\\ic_search_round.png"
     },
@@ -466,6 +518,10 @@
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_connections.xml.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\layout\\activity_connections.xml"
+    },
+    {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_filter.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_filter.png"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_profile_icon.png.flat",
@@ -544,6 +600,14 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-xhdpi\\heart.png"
     },
     {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_filter.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_filter.png"
+    },
+    {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_email.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_email.png"
+    },
+    {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable_button_shape.xml.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\drawable\\button_shape.xml"
     },
@@ -576,6 +640,10 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_cancel.png"
     },
     {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_email.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_email.png"
+    },
+    {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_add_pic.png.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_add_pic.png"
     },
@@ -586,6 +654,10 @@
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_add_pic.png.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_add_pic.png"
+    },
+    {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_home.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_home.png"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_group_icon.png.flat",
@@ -638,6 +710,14 @@
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_trip_list.xml.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\layout\\activity_trip_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_home.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_home.png"
+    },
+    {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_phone.xml.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_phone.xml"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_launcher_background.png.flat",
@@ -704,6 +784,10 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-xxhdpi\\profile_icon_round.png"
     },
     {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_phone.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_phone.png"
+    },
+    {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_group_icon_round.xml.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-anydpi-v26\\group_icon_round.xml"
     },
@@ -720,12 +804,24 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_search.png"
     },
     {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_phone.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_phone.png"
+    },
+    {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_profile_icon_foreground.xml.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\profile_icon_foreground.xml"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable_backround_gradient.xml.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\drawable\\backround_gradient.xml"
+    },
+    {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_filter.xml.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_filter.xml"
+    },
+    {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_home.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_home.png"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\layout_row_group_chat_left.xml.flat",
@@ -796,6 +892,10 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\chat_box_foreground.xml"
     },
     {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_phone.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_phone.png"
+    },
+    {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\menu_chat_menu.xml.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\menu\\chat_menu.xml"
     },
@@ -832,6 +932,10 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\mipmap-xhdpi\\ic_search_round.png"
     },
     {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_filter.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_filter.png"
+    },
+    {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_group_icon_foreground.png.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\group_icon_foreground.png"
     },
@@ -848,8 +952,16 @@
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\chat_box_foreground.png"
     },
     {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_home.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_home.png"
+    },
+    {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\layout_item_card.xml.flat",
         "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\src\\main\\res\\layout\\item_card.xml"
+    },
+    {
+        "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_email.png.flat",
+        "source": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_email.png"
     },
     {
         "merged": "C:\\Users\\liamr\\AndroidStudioProjects\\FYPStayCation\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_link.png.flat",
